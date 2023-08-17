@@ -12,10 +12,10 @@ The overall supply chain finance landscape can be roughly differentiated into th
 
 ## Our Focus - Reverse Factoring
 
-<figure><img src=".gitbook/assets/image (10).png" alt=""><figcaption><p>Lopo Finance Overview</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption><p>Lopo Finance Overview</p></figcaption></figure>
 
 Lopo finance is a novel funding solution to cover the needs of suppliers, originated by large buyers, where suppliers can get financed with crypto through buyer-approved invoices on the blockchain.
 
 The following presents a sample business use case where Nike utilized Lopo Finance to finance its suppliers.
 
-<figure><img src=".gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>

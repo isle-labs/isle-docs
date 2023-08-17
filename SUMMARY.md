@@ -1,7 +1,9 @@
 # Table of contents
 
+## Introduction
+
 * [What is Lopo Finance?](README.md)
-* [What is Supply Chain Finance?](what-is-supply-chain-finance.md)
+* [What is Supply Chain Finance?](introduction/what-is-supply-chain-finance.md)
 
 ## Protocol Mechanics
 
