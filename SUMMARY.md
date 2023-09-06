@@ -10,7 +10,7 @@
 * [Glossary of Key Terms](protocol-mechanics/glossary-of-key-terms.md)
 * [Pool Admins](protocol-mechanics/pool-admins.md)
 * [Buyers](protocol-mechanics/buyers.md)
-* [Suppliers](protocol-mechanics/suppliers.md)
+* [Sellers](protocol-mechanics/sellers.md)
 * [Liquidity Providers](protocol-mechanics/liquidity-providers.md)
 * [Governance](protocol-mechanics/governance.md)
 * [Fees](protocol-mechanics/fees.md)

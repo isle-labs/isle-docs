@@ -1,3 +1,7 @@
+---
+description: Smart investors who earn yield by providing funds
+---
+
 # Liquidity Providers
 
 {% hint style="info" %}
@@ -9,14 +13,14 @@ Liquidity providers are investors who hope to earn yields by investing in the li
 Each pool will follow the [ERC4626 vault standard](https://erc4626.info/). This standard specifies how the LP tokens accrue value from the buyer's repayment of loans. Before depositing, we will suggest that you go through the following steps:
 
 1. Go through KYC and get whitelisted.
-2. Review the Pool Admin's track record and understand what type of industry the pool is investing in.
-3. Review the terms for withdrawal so you know when you can withdraw and how much.&#x20;
+2. Review the **Pool Admin**'s track record and understand what type of industry the pool is investing in.
+3. Review the terms for withdrawal so you know when you can withdraw and how much.
 
 ## Withdrawing Capital
 
-All withdrawal requests are grouped into **Withdrawal Cycles** (1 \~ 2 weeks), which are cyclically occurring periods of time. By grouping users into cycles, Pool Admins ensure that users get a prorated distribution of cash in the event of a partial liquidity of the system.
+All withdrawal requests are grouped into **Withdrawal Cycles** (1–2 weeks), which are cyclically occurring periods of time. By grouping users into cycles, Pool Admins ensure that users get a prorated distribution of cash in the event of partial liquidity in the system.
 
-At the start of each cycle (such as the first two days of each 2 week cycle), there will be a window of time where part of the liquidity is locked for withdrawal requests that are submitted in the previous cycle. This window is called the **Withdrawal Window**.&#x20;
+At the start of each cycle (such as the first two days of each two-week cycle), there will be a window of time where part of the liquidity is locked for withdrawal requests that were submitted in the previous cycle. This window is called the **Withdrawal Window**.&#x20;
 
 During each withdrawal window, the amount of liquidity required to satisfy all withdrawals will be locked and not at the disposal of **Pool Admins**.
 

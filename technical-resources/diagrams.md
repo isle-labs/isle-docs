@@ -30,13 +30,13 @@ flowchart LR;
   PA -- "onboardSeller" --> LM
 ```
 
-### Buyer approves receivable for financing
+### Buyer approves a loan to created for the receivable
 
 ```mermaid
 flowchart LR;
   B((Buyer))
   LM[LoanManager]
-  B -- "approveReceivable" --> LM
+  B -- "approveLoan" --> LM
 ```
 
 ### Pool Admin funds loan
