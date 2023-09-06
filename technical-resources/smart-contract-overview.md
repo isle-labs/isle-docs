@@ -2,11 +2,11 @@
 
 ### LopoGlobals
 
-This singleton contract is in charge of the Lopo protocol configuration, handling values such as protocol fees, the list of valid PoolAddressesProviders, and more. It can only be administered by the Governor.
+This singleton contract is in charge of the Lopo protocol configuration, handling values such as protocol fees, the list of valid PoolAddressesProviders, and more. It can only be owned and administered by the Governor.
 
 ### PoolAddressesProvider
 
-Serves as the address registry of the pool and can update implementations of contracts within the pool. This contract is immutable, and its address will never change.
+Serves as the address registry of the pool and can update implementations of contracts within the pool. This contract is immutable, and its address will never change. By default, it should be owned by the governor.
 
 ### PoolConfigurator
 
