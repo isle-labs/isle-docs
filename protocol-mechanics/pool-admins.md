@@ -24,6 +24,7 @@ A pool is a smart contract through which liquidity providers deposit and withdra
 * **Risk-Free Rate**: The risk-free interest rate assumed in this pool (e.g. 5%)
 * **Late Interest Rate Premium:** The additional premium of interest rate that will be applied to buyers during the grace period (e.g. 3%)
 * **Pool Admin Fee**: The fee as a percentage of interest repaid that will be given to the Pool Admin (e.g. 10%)
+* **Grace Period**: The length of the grace period for a buyer that fails to repay on time.&#x20;
 
 The Pool Admin will be allowed to update these parameters after the pool is created. However, it will only take effect after 30 days based on a timelock mechanism.
 
