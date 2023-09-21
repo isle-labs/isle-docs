@@ -30,7 +30,7 @@ flowchart LR;
   PA -- "onboardSeller" --> LM
 ```
 
-### Buyer approves a loan to created for the receivable
+### Buyer approves a loan to be created for the receivable
 
 ```mermaid
 flowchart LR;
