@@ -1,33 +1,37 @@
 ---
-description: Companies that pay their suppliers early with cheap funding
+description: Pay the suppliers early with accessible funding
 ---
 
 # Buyers
 
 ## Overview
 
-Buyers are companies that seek financing for their suppliers using the protocol. They can approve invoices, which enable their suppliers to receive direct financing through the protocol. Before the expiration of the invoices, the corresponding buyers will then fulfill the repayments back to the protocol.
+Buyers are companies that seek financing for their suppliers. They can approve receivables, which enable their suppliers to receive direct financing through the protocol. Before the expiration of the invoices, the corresponding buyers will then make repayments back to the pool.
 
 ## Buyer Onboarding
 
-To apply for early financing for suppliers, each buyer should go through a credit check performed by the corresponding **Pool Admin**. Then, the buyer will be whitelisted in the pool.
+To apply for early financing for suppliers, each buyer should go through the due diligence performed by the **Pool Admin**. Then, the buyer will be whitelisted in the pool.
 
-## Approving Receivables and funding
+## Approving Receivables
 
-After buyers negotiate the terms with the **Pool Admin,** they should approve the receivables for funding. The **Pool Admin** will then fund the loan, which should contain the following terms:
+{% hint style="info" %}
+We expect buyers and the Pool Admin to negotiate terms offline so as to minimize unneeded expenditure.
+{% endhint %}
 
-* **Collateral ID:** The token ID of the receivable NFT that is approved and funded
-* **Principal**: The amount of funds that will be given to the seller.
+After buyers negotiate the terms with the **Pool Admin,** they should approve the receivables for funding with the following terms.
+
+* **Collateral ID:** The token ID of the receivable NFT to approve
+* **PrincipalRequested**: The amount of funds for the seller to withdraw
 
 $$
 Principal = FaceAmount \times (1 - DiscountRate)
 $$
 
-* **Interest Rate**: Provided by the Pool Admin (must be larger than the Risk-Free Rate of the pool)
+* **Interest Rate**: Provided by the Pool Admin (must be larger than the **Base Rate** of the pool)
 * **Late Interest Rate Premium**: The extra interest rate that will be applied if the buyer is late on repayment.
-* **Grace Period**: The length of the grace period before the loan is classified as default.
-* **Repayment Date:** Repayment date of the receivable.
-* **Recipient**: The seller of the invoice, who is able to withdraw the funds.
+* **Grace Period**: The length of time after the due date during which payment may be made with an additional late interest rate premium
+* **Repayment Date:** The repayment date of the receivable
+* **Recipient**: The seller who is able to withdraw the funds.
 
 {% hint style="info" %}
 **Discount Rate** will be determined in the negotiation process and should typically be in the range of 0% \~ 50% depending on the industry of the buyer and seller.
@@ -37,14 +41,16 @@ The **Discount Rate** will differ for each receivable and the principal provided
 
 <table><thead><tr><th width="122">Invoice</th><th>Discount Rate</th><th>Face Amount</th><th>Principal</th></tr></thead><tbody><tr><td>Inv-1</td><td>15%</td><td>$100,000</td><td>$85,000</td></tr><tr><td>Inv-2</td><td>30%</td><td>$200,000</td><td>$140,000</td></tr></tbody></table>
 
-Under these circumstances, the **Pool Admin** may reject a buyer's request to initiate a loan.
+If the negotiation goes successfully, the **Pool Admin** can then fund the receivables, marks the start of the loan.
+
+However, the **Pool Admin** may reject a buyer's request to initiate a loan due to the following reasons.
 
 1. The **Pool Admin** needs more information on the validity of the invoices
-2. The pool does not have enough liquidity to be lent out
+2. The pool does not have sufficient liquidity to be lent out
 
 ## Repaying Loans
 
-Before the loan expires, the buyer will have to repay the loan before the repayment date. The interest will be calculated as **simple interest** on the principal amount. After the buyer repays the loan fully, the loan will be closed and no interest will be generated for the loan.
+Before the loan expires, the buyer will have to repay the loan before the repayment date. The interest will be calculated as **simple interest** on the principal amount. After the buyer repays the loan fully, the loan will be closed.
 
 <details>
 
@@ -62,11 +68,11 @@ _Payment before expiration:_
 
 If the buyer repays on 2023/8/25, the interest applied will be$$\$140,000 \times 10\% \times 24/365 = \$ 920.55$$
 
-Here, we calculate using days instead of seconds in order to simplify the calculation. In practice, it is calculated in seconds.
-
 _Late Payment:_
 
 If the buyer repays on 2023/9/5, the interest applied will be $$ $140,000 \times (10\% \times 31/365 + 15\% \times 4/365) = $1419.18 $$
+
+Here, we calculate using days instead of seconds in order to simplify the calculation. In practice, it is calculated in seconds.
 
 </details>
 
@@ -74,7 +80,7 @@ If the buyer repays on 2023/9/5, the interest applied will be $$ $140,000 \times
 
 If the buyer is deemed unlikely to repay the loan, the loan can be impaired by the **Pool Admin**.&#x20;
 
-Furthermore, if the buyer misses the payment of the loan, the loan can be marked as default by the **Pool Admin.** (see [pool-admins.md](pool-admins.md "mention"))
+Furthermore, if the buyer misses the repayment date of the loan, the loan will be marked as default by the **Pool Admin.**
 
 ## Buyer Repayment Incentives
 

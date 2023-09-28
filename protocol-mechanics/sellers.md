@@ -1,5 +1,5 @@
 ---
-description: Companies that get paid early and invest it in working capital
+description: Get paid early and invest it in working capital
 ---
 
 # Sellers
@@ -22,7 +22,7 @@ Any seller or buyer is allowed to mint receivable NFTs, which represent the righ
 
 In order to become a valid supplier for reverse factoring, the supplier will have to send an application to the corresponding **Pool Admin** to get whitelisted. Note that a seller must be whitelisted before they can redeem funds.
 
-## Redeem Funds
+## Withdraw Funds
 
-After invoices are approved for their suppliers, the suppliers will be able to redeem the principal of the loans at any time using their wallet address.
+After invoices are approved for their suppliers, the suppliers will be able to withdraw the principal of the loans at any time after transferring the receivables NFT to the `LoanManager`.
 

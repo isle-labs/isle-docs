@@ -1,3 +1,7 @@
+---
+description: The DeFi protocol for Supply Chain Finance
+---
+
 # What is Lopo Finance?
 
 <figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption><p>Lopo Finance's Mission</p></figcaption></figure>
