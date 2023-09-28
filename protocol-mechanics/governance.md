@@ -1,8 +1,12 @@
+---
+description: Manages protocol-wide configurations
+---
+
 # Governance
 
 The community DAO is in charge of managing governance. It has the ability to perform maintenance functions and parameter adjustments to the protocol via decentralized voting, including:
 
-* Upgrading contracts
+* Deploying and upgrading pools
 * Changing protocol configurations and parameters
 * Pausing protocol activity in the event of an emergency
 
@@ -23,7 +27,27 @@ Members of the governance council will be released after the protocol launches o
 ## Governance Parameters
 
 {% hint style="info" %}
-Different from pool parameters. These parameters are set to be protocol-wide and affect each pool.
+Different from pool parameters which are managed by pool admins. These parameters are set to be protocol-wide and affect each pool.
 {% endhint %}
 
-<table><thead><tr><th width="184">Parameter</th><th width="190">type</th><th>Description</th></tr></thead><tbody><tr><td><code>PROTOCOL_FEE</code></td><td>uint8</td><td>The percentage of interest revenue that will be charged by the protcol. (e.g. 0.5%) </td></tr><tr><td><code>POOL_LIMIT</code></td><td>mapping(address => uint256)</td><td>The limit on the size of a pool for each pool admin.</td></tr><tr><td><code>MAX_COVER_LIQUIDATION</code></td><td>mapping(address => uint8)</td><td>The maximum liquidation percentage per default of pool cover for each pool admin.</td></tr><tr><td><code>MIN_COVER</code></td><td>mapping(address => uint256)</td><td>The minimum amiount of pool cover that will need to be provided for each pool admin. </td></tr></tbody></table>
+The following parameters that are configured by the governor.
+
+### PoolAdmin
+
+* `ownedPoolConfigurator`: the pool configurator associated with each pool admin
+
+### Pool Configurator
+
+* `maxCoverLiquidation`: the max liquidation of the pool admin's cover
+* `minCover`: the minimum cover required for the pool&#x20;
+* `poolLimit`: The maximum size of the pool
+
+### Global
+
+* `isCollateralAsset`: a whitelist of valid collateral assets
+* `isPoolAsset`: a whitelist of valid pool assets
+* `lopoVault`: address of the lopo vault
+* `protocolFee`: the global fee as a percentage of interest that is charged
+
+
+

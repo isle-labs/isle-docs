@@ -14,7 +14,7 @@ It has a one-to-one relationship with the pool. It handles most of the administr
 
 ### Pool
 
-The pool implements the vault standard (ERC4626) and it's intentionally kept as simple as possible,  containing mostly token and deposit / withdrawal functionality. It's the only contract that LPs need to interact with. Due to its immutability, some logic is delegated to the PoolConfigurator, which is the only external contract that the Pool interacts with.
+The pool implements the vault standard (ERC4626) ,and it's intentionally kept as simple as possible,  containing mostly token and deposit / withdrawal functionality. It's the only contract that LPs need to interact with. Due to its immutability, some logic is delegated to the PoolConfigurator, which is the only external contract that the Pool interacts with.
 
 ### WithdrawalManager
 
