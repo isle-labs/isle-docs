@@ -14,12 +14,10 @@ The overall supply chain finance landscape can be roughly differentiated into th
 * **Seller-side finance**: includes factoring and invoice financing, which provide financing to corporate sellers by anticipating liquidity related to commercial transactions.&#x20;
 * **Buyer-side finance**: aims at large buyers and their suppliers. It covers the financing needs of suppliers originated by large buyers, such as **reverse factoring** and **dynamic discounting**. This segment has traditionally been a smaller and more fragmented market, but it is now growing at double-digits due to increasing interest and new offerings by players.
 
-## Our Focus - Reverse Factoring
+## A Buyer-centric approach - Reverse Factoring
 
-<figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption><p>Lopo Finance Overview</p></figcaption></figure>
-
-Lopo finance is a novel funding solution to cover the needs of suppliers, originated by large buyers, where suppliers can get financed with crypto through buyer-approved invoices on the blockchain.
+**Isle Finance** is a novel funding solution to cover the needs of suppliers, originated by large buyers, where suppliers can get financed with crypto through buyer-approved invoices on the blockchain.
 
 The following presents a sample business use case where Nike could utilize Lopo Finance to finance its suppliers.
 
-<figure><img src="../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Flow.png" alt=""><figcaption><p>Sample Business Flow</p></figcaption></figure>

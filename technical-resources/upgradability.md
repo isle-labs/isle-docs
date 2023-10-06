@@ -11,7 +11,7 @@ All upgradability is controlled by the governor.&#x20;
   * `PoolAddressesProvider.sol`
 * UUPS upgradable
   * `Receivables.sol`
-  * `LopoGlobals.sol`
+  * `IsleGlobals.sol`
 * Transparent Upgradable
   * `PoolConfigurator.sol`
   * `WithdrawalManager.sol`

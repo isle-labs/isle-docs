@@ -2,7 +2,7 @@
 
 ## Introduction
 
-* [What is Lopo Finance?](README.md)
+* [What is Isle Finance?](README.md)
 * [What is Supply Chain Finance?](introduction/what-is-supply-chain-finance.md)
 
 ## Protocol Mechanics
@@ -14,10 +14,6 @@
 * [Liquidity Providers](protocol-mechanics/liquidity-providers.md)
 * [Governance](protocol-mechanics/governance.md)
 * [Fees](protocol-mechanics/fees.md)
-
-***
-
-* [FAQ](faq.md)
 
 ## Technical Resources
 

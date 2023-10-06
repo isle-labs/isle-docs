@@ -8,7 +8,7 @@ Architecture of all smart contracts&#x20;
 
 ## Scenarios
 
-A collection of scenarios to help you understand how Lopo protocol works from end to end
+A collection of scenarios to help you understand how Isle Finance works from end to end
 
 ### Seller mints receivables NFT
 

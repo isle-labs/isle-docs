@@ -2,8 +2,14 @@
 
 ## Participants
 
-* **Pool Admins:** Experts in a specific industry who perform due diligence on buyers and provide financing for the suppliers
-* **Buyers:** Companies that upload invoices to the protocol to extend financing to their associated suppliers
-* **Suppliers:** Companies that can redeem funds early for every buyer-approved invoice
-* **Liquidity Providers:** Liquidity providers who supply stablecoin capital to the Lopo protocol
-* **Governance Council**: A group of representatives of the community DAO that updates the protocol via decentralized governance votes
+* **Pool Admins:** Fintech industry experts who are responsible for managing buyer pools on behalf of the protocol
+* **Buyers:** Companies that approve their receivables and extend financing to their corresponding supplier with the pool
+* **Suppliers:** Companies that can get paid early for every buyer-approved receivable
+* **Liquidity Providers (LPs):** Liquidity providers who supply stablecoin capital to different liquidity pools
+* **Governance Council**: A group of representatives of the community DAO that configures the protocol on behalf of decentralized governance
+
+### Concepts
+
+* **Pool:** A place where LPs can deposit funds to fund the suppliers of a particular buyer
+* **Unrealized Losses**: The total value of all loans that have been marked as impaired
+*

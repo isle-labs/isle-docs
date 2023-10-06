@@ -24,5 +24,4 @@ In order to become a valid supplier for reverse factoring, the supplier will hav
 
 ## Withdraw Funds
 
-After invoices are approved for their suppliers, the suppliers will be able to withdraw the principal of the loans at any time after transferring the receivables NFT to the `LoanManager`.
-
+After invoices are approved for their suppliers, the suppliers will be able to withdraw the principal of the loans at any time by transferring the receivables NFT to the `LoanManager`.

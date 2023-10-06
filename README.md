@@ -1,12 +1,10 @@
 ---
-description: The DeFi protocol for Supply Chain Finance
+description: The DeFi protocol that connects the real world supply chain
 ---
 
-# What is Lopo Finance?
+# What is Isle Finance?
 
-<figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption><p>Lopo Finance's Mission</p></figcaption></figure>
-
-**Lopo Finance** is the decentralized protocol for globally accessible supply chain finance, with a mission to bring the world's supply chain activity on-chain while _expanding capital access_ and _increasing supply chain resilience_.
+**Isle Finance** is the decentralized protocol for globally accessible supply chain finance, with a mission to bring the world's supply chain activity on-chain while _expanding capital access_ and _increasing supply chain resilience_.
 
 ## Financing the global supply chain with DeFi
 
@@ -29,9 +27,9 @@ Therefore, Lopo Finance is here to **bring all real-world supply chain economic 
 
 ## Providing real-world investment opportunities for DeFi
 
-Besides the benefits of using DeFi technology for the supply chain, Lopo Finance is also able to contribute immense value to the entire crypto ecosystem.
+Besides the benefits of using DeFi technology for the supply chain, **Isle Finance** is also able to contribute immense value to the entire crypto ecosystem.
 
-The protocol makes crypto loans without requiring crypto collateral. Instead, it relies on real-world supply chain activity, which finally unlocks access to crypto capital for companies around the world. By collaborating and integrating with the vibrant crypto ecosystem (digital identity solutions, decentralized credit oracles, etc.), Lopo is the solution for crypto capital to finance the global supply chain.
+The protocol makes crypto loans without requiring crypto collateral. Instead, it relies on real-world supply chain activity, which finally unlocks access to crypto capital for companies around the world. By collaborating and integrating with the vibrant crypto ecosystem (digital identity solutions, decentralized credit oracles, etc.), **Isle** is the solution for crypto capital to finance the global supply chain.
 
-Over the past decade, the crypto space has been notorious for speculative activities, rug pulls, hacks, and more. It has been associated with high risks due to the prevalence of information asymmetry created in complex crypto-money games. We believe that without real-world economic activities, the need for complex financial derivatives will be limited, and adoption will only go so far. Lopo is here to be the foundational building block to bring the supply chain onto DeFi. By doing so, Lopo can significantly expand the use case of DeFi.
+Over the past decade, the crypto space has been notorious for speculative activities, rug pulls, hacks, and more. It has been associated with high risks due to the prevalence of information asymmetry created in complex crypto-money games. We believe that without real-world economic activities, the need for complex financial derivatives will be limited, and adoption will only go so far. **Isle** is here to be the foundational building block to bring the supply chain onto DeFi. By doing so, **Isle** can significantly expand the use case of DeFi.
 

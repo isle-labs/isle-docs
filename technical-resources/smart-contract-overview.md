@@ -1,8 +1,8 @@
 # Smart Contract Overview
 
-### LopoGlobals
+### IsleGlobals
 
-This singleton contract is in charge of the Lopo protocol configuration, handling values such as protocol fees, the list of valid PoolAddressesProviders, and more. It can only be owned and administered by the Governor.
+This singleton contract is in charge of the Isle protocol configuration, handling values such as protocol fees, the list of valid PoolAddressesProviders, and more. It can only be owned and administered by the Governor.
 
 ### PoolAddressesProvider
 

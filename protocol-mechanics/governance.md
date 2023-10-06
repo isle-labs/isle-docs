@@ -20,21 +20,21 @@ This is a place where community members can make and discuss proposals.
 
 ## Governance Council
 
-The governance council of Lopo has been set up to execute on-chain transactions on behalf of the results of community votes. The Lopo Council is a 3-of-5 multisig with 5 members representing all stakeholders participating in the protocol.
+The governance council of Lopo has been set up to execute on-chain transactions on behalf of the results of community votes. The Isle Council is a 3-of-5 multisig with 5 members representing all stakeholders participating in the protocol.
 
 Members of the governance council will be released after the protocol launches officially.
 
 ## Governance Parameters
 
 {% hint style="info" %}
-Different from pool parameters which are managed by pool admins. These parameters are set to be protocol-wide and affect each pool.
+Different from pool parameters which are managed by **Pool Admins**. These parameters are set to be protocol-wide and affect each pool.
 {% endhint %}
 
 The following parameters that are configured by the governor.
 
 ### PoolAdmin
 
-* `ownedPoolConfigurator`: the pool configurator associated with each pool admin
+* `ownedPoolConfigurator`: the pool configurators associated with each pool admin
 
 ### Pool Configurator
 
@@ -46,8 +46,5 @@ The following parameters that are configured by the governor.
 
 * `isCollateralAsset`: a whitelist of valid collateral assets
 * `isPoolAsset`: a whitelist of valid pool assets
-* `lopoVault`: address of the lopo vault
+* `isleVault`: address of the **Isle vault**
 * `protocolFee`: the global fee as a percentage of interest that is charged
-
-
-

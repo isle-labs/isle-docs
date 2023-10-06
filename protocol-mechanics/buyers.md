@@ -1,16 +1,16 @@
 ---
-description: Pay the suppliers early with accessible funding
+description: Pay the suppliers early and repay later
 ---
 
 # Buyers
 
 ## Overview
 
-Buyers are companies that seek financing for their suppliers. They can approve receivables, which enable their suppliers to receive direct financing through the protocol. Before the expiration of the invoices, the corresponding buyers will then make repayments back to the pool.
+Buyers are companies that seek financing for their suppliers. They can approve receivables, which enable their suppliers to receive direct financing through the pool. Before the expiration of the receivables, the corresponding buyers will then make repayments back to the pool. Since they are the ones making the repayment, the **credibility of the buyers** are the most important metric for investors.&#x20;
 
 ## Buyer Onboarding
 
-To apply for early financing for suppliers, each buyer should go through the due diligence performed by the **Pool Admin**. Then, the buyer will be whitelisted in the pool.
+After a pool is created, the **Pool Admin** should conduct due diligence on the buyer and assign the buyer to the pool.&#x20;
 
 ## Approving Receivables
 
@@ -27,11 +27,11 @@ $$
 Principal = FaceAmount \times (1 - DiscountRate)
 $$
 
-* **Interest Rate**: Provided by the Pool Admin (must be larger than the **Base Rate** of the pool)
-* **Late Interest Rate Premium**: The extra interest rate that will be applied if the buyer is late on repayment.
+* **Interest Rate**: The interest rate applied on the principal (must be larger than the **Base Rate** of the pool)
+* **Late Interest Rate Premium**: The extra interest rate that will be applied if the buyer is late on repayment
 * **Grace Period**: The length of time after the due date during which payment may be made with an additional late interest rate premium
 * **Repayment Date:** The repayment date of the receivable
-* **Recipient**: The seller who is able to withdraw the funds.
+* **Recipient**: The supplier who is able to withdraw the funds
 
 {% hint style="info" %}
 **Discount Rate** will be determined in the negotiation process and should typically be in the range of 0% \~ 50% depending on the industry of the buyer and seller.
@@ -41,7 +41,7 @@ The **Discount Rate** will differ for each receivable and the principal provided
 
 <table><thead><tr><th width="122">Invoice</th><th>Discount Rate</th><th>Face Amount</th><th>Principal</th></tr></thead><tbody><tr><td>Inv-1</td><td>15%</td><td>$100,000</td><td>$85,000</td></tr><tr><td>Inv-2</td><td>30%</td><td>$200,000</td><td>$140,000</td></tr></tbody></table>
 
-If the negotiation goes successfully, the **Pool Admin** can then fund the receivables, marks the start of the loan.
+If the negotiation goes successfully, the **Pool Admin** can then fund the receivables, which marks the start of the loan.
 
 However, the **Pool Admin** may reject a buyer's request to initiate a loan due to the following reasons.
 
@@ -92,8 +92,8 @@ The key question is why buyers would pay back what they borrowed.
 
 Since buyers would need to publicize their wallet addresses when approving invoices, their on-chain history becomes public to future creditors. As more financial activity moves on chain, companies will be more incentivized to maintain a good long-term credit history on chain.
 
-### Second Incentive: The ability to continue to use Lopo
+### Second Incentive: The ability to continue to use Isle Finance
 
-As soon as a buyer defaults, it would be immediately denied the approval of new invoices for their suppliers, which could cause more working capital problems in the supply chain.
+As soon as a buyer defaults, it would be immediately banned from approving more receivables for their suppliers, which could cause more working capital problems in the supply chain.
 
-Moreover, buyers would be repaying either the protocol or the supplier no matter what. Therefore, Lopo imposes no extra cost on the buyer and would allow its supplier to get early capital financing, which is a win-win scenario for both sides.
+Moreover, buyers would be repaying either the protocol or the supplier no matter what. Therefore, Isle imposes no extra cost on the buyer and would allow its supplier to get early capital financing, which is a win-win scenario for both sides.
