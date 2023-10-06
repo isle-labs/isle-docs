@@ -12,4 +12,5 @@
 
 * **Pool:** A place where LPs can deposit funds to fund the suppliers of a particular buyer
 * **Unrealized Losses**: The total value of all loans that have been marked as impaired
-*
+* **Receivables**: The rights a supplier has to receive payment in the future for providing products or services to the buyer (typically collected within 30, 60, 90 days)
+* **Loans**: When a pool admin funds a receivable approved by the buyer, a loan between the buyer and the pool is created to represent the repayment obligation.
