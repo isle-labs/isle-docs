@@ -22,3 +22,4 @@
 * [Loan Accounting](technical-resources/loan-accounting.md)
 * [Withdrawal Management](technical-resources/withdrawal-management.md)
 * [Upgradability](technical-resources/upgradability.md)
+* [Commands](technical-resources/commands.md)
