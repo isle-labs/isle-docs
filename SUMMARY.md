@@ -5,21 +5,21 @@
 * [What is Isle Finance?](README.md)
 * [What is Supply Chain Finance?](introduction/what-is-supply-chain-finance.md)
 
-## Protocol Mechanics
+## Concepts
 
-* [Glossary of Key Terms](protocol-mechanics/glossary-of-key-terms.md)
-* [Pool Admins](protocol-mechanics/pool-admins.md)
-* [Buyers](protocol-mechanics/buyers.md)
-* [Sellers](protocol-mechanics/sellers.md)
-* [Liquidity Providers](protocol-mechanics/liquidity-providers.md)
-* [Governance](protocol-mechanics/governance.md)
-* [Fees](protocol-mechanics/fees.md)
+* [Glossary of Key Terms](concepts/glossary-of-key-terms.md)
+* [Pool Admins](concepts/pool-admins.md)
+* [Buyers](concepts/buyers.md)
+* [Sellers](concepts/sellers.md)
+* [Liquidity Providers](concepts/liquidity-providers.md)
+* [Governance](concepts/governance.md)
+* [Fees](concepts/fees.md)
 
-## Technical Resources
+## Contracts
 
-* [Smart Contract Overview](technical-resources/smart-contract-overview.md)
-* [Diagrams](technical-resources/diagrams.md)
-* [Loan Accounting](technical-resources/loan-accounting.md)
-* [Withdrawal Management](technical-resources/withdrawal-management.md)
-* [Upgradability](technical-resources/upgradability.md)
-* [Commands](technical-resources/commands.md)
+* [Smart Contract Overview](contracts/smart-contract-overview.md)
+* [Diagrams](contracts/diagrams.md)
+* [Loan Accounting](contracts/loan-accounting.md)
+* [Withdrawal Management](contracts/withdrawal-management.md)
+* [Upgradability](contracts/upgradability.md)
+* [Commands](contracts/commands.md)

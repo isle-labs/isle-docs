@@ -20,7 +20,7 @@ This is a place where community members can make and discuss proposals.
 
 ## Governance Council
 
-The governance council of Lopo has been set up to execute on-chain transactions on behalf of the results of community votes. The Isle Council is a 3-of-5 multisig with 5 members representing all stakeholders participating in the protocol.
+The governance council of Isle has been set up to execute on-chain transactions on behalf of the results of community votes. The Isle Council is a 3-of-5 multisig with 5 members representing all stakeholders participating in the protocol.
 
 Members of the governance council will be released after the protocol launches officially.
 
