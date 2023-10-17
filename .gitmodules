@@ -1,3 +1,0 @@
-[submodule ".repo/isle"]
-	path = .repo/isle
-	url = https://github.com/bsostech/isle.git
