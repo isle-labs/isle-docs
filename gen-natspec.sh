@@ -10,7 +10,7 @@
 set -euo pipefail
 
 # Define the reference directory
-reference=docs/contracts/reference
+reference=docs/reference
 
 run() {
     # This is either "core" or "periphery"
