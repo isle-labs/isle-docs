@@ -9,12 +9,15 @@
 # Strict mode: https://gist.github.com/vncsna/64825d5609c146e80de8b1fd623011ca
 set -euo pipefail
 
+# Define the reference directory
+reference=docs/contracts/reference
+
 run() {
     # This is either "core" or "periphery"
     repo=$1
 
     # cd into the repo
-    cd .repo/$repo
+    cd repo/$repo
 
     # Delete the previously generated docs
     rm -rf ./docs
@@ -25,49 +28,45 @@ run() {
     # Go back to the root
     cd ../../
 
-    # Define the reference directory
-    reference=contracts/interfaces
-
     # Delete the current V2 reference
     find $reference -type f -name "*.md" -delete
-
-    pwd
-
-    ls .repos/$repo/docs
 
     # Copy over the auto-generated files
     rsync --archive \
     --exclude "README.md" \
     --exclude "SUMMARY.md" \
-    .repos/$repo/docs/src/contracts/* \
+    repo/$repo/docs/src/contracts/* \
     $reference
 
-    # Move all Markdown files one level up
-    find $reference -type f -name "*.md" -execdir mv {} .. \;
+    # Move all Markdown files one level up and rename files to remove the "contract.", "interface.", "abstract." prefix
+    find $reference -type f -name "*.md" -execdir bash -c 'mv -- "$1" "../${1#*.}"' bash {} \;
 
     # Delete empty *.sol directories
     find $reference -type d -empty -delete
-
-    # # The Periphery has certain references to the Core
-    # sd "\{SablierV2LockupDynamic\}" "[SablierV2LockupDynamic]($core/contract.SablierV2LockupDynamic.md)" $(find $reference -type f -name "*.md")
-    # sd "\{SablierV2LockupLinear\}" "[SablierV2LockupLinear]($core/contract.SablierV2LockupLinear.md)" $(find $reference -type f -name "*.md")
-
-    # # Replace the interface references, e.g. {ISablierV2Lockup}, with hyperlinks
-    # sd "\{I(\w+)\}" "[I\$1](/$reference/interfaces/interface.I\$1.md)" $(find $reference -type f -name "*.md")
-
-    # # Replace the contract references, e.g. {SablierV2LockupLinear}, with hyperlinks
-    # # Note: abstract contracts won't work
-    # sd "\{SablierV2(\w+)\}" "[SablierV2\$1](/$reference/contract.SablierV2\$1.md)" $(find $reference -type f -name "*.md")
 }
 
 # Generate the raw docs with Forge
 run "isle"
 
+# Update the hyperlinks to use the directory structure of the docs website
+sd "contracts/abstracts/\w+\.sol" $reference/abstracts $(find $reference -type f -name "*.md")
+sd "contracts/interfaces/pool/\w+\.sol" $reference/interfaces/pool $(find $reference -type f -name "*.md")
+sd "contracts/interfaces/\w+\.sol" $reference/interfaces $(find $reference -type f -name "*.md")
+sd "contracts/libraries/\w+\.sol" $reference/libraries $(find $reference -type f -name "*.md")
+sd "contracts/libraries/types/\w+\.sol" $reference/libraries/types $(find $reference -type f -name "*.md")
+sd "contracts/libraries/upgradability/\w+\.sol" $reference/libraries/upgradability $(find $reference -type f -name "*.md")
+sd "contracts/\w+\.sol" $reference $(find $reference -type f -name "*.md")
+
+# Remove the "contract.", "interface.", "abstract." prefix from the file names
+# e.g. interface.IPool.md => IPool.md
+sd "(\w+).(\w+).md" "\$2.md" $(find $reference -type f -name "*.md")
+
 # Format the docs with Prettier
-pnpm prettier --loglevel silent --write $all
+pnpm prettier --loglevel silent --write $reference
 
 # Remove the italic asterisks added by `forge doc`: https://github.com/foundry-rs/foundry/issues/4540
-sd --string-mode "\*" "" $(find $all -type f -name "*.md")
+sd --string-mode "\*" "" $(find $reference -type f -name "*.md")
 
 # Re-format the docs with Prettier
-pnpm prettier --loglevel silent --write $all
+pnpm prettier --loglevel silent --write $reference
+
