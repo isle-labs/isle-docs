@@ -45,6 +45,29 @@ run() {
     find $reference -type d -empty -delete
 }
 
+generate_summary_markdown() {
+    local path=$1
+    local indent_level=$2
+    local indent=""
+
+    # Generate the required indentation
+    for ((i=0; i<$indent_level; i++)); do
+        indent="${indent}  "
+    done
+
+    # Iterate over all files and directories in the path
+    for item in "$path"/*; do
+        # If the item is a directory, print the directory name and recurse
+        if [ -d "$item" ]; then
+            echo "${indent}* $(basename "$item")"
+            generate_summary_markdown "$item" $(($indent_level+1))
+        # If the item is a file, print the markdown link
+        elif [ -f "$item" ]; then
+            echo "${indent}* [$(basename "$item" .md)]($item)"
+        fi
+    done
+}
+
 # Generate the raw docs with Forge
 run "isle"
 
@@ -70,3 +93,16 @@ sd --string-mode "\*" "" $(find $reference -type f -name "*.md")
 # Re-format the docs with Prettier
 pnpm prettier --loglevel silent --write $reference
 
+
+# Start the script
+cd docs
+
+# Generate the SUMMARY content
+generate_summary_markdown "reference" 0 > temp.md
+
+# Replace the section between the markers with the generated markdown links
+perl -i -p0e 's/<!-- START -->(.*?)<!-- END -->/"<!-- START -->\n".`cat temp.md`."<!-- END -->"/gse' SUMMARY.md
+
+rm temp.md
+
+cd ..
