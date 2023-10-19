@@ -24,12 +24,8 @@
 * [Upgradability](contracts/upgradability.md)
 * [Commands](contracts/commands.md)
 
-
-
 ## Reference
-<!-- The Following Sections are automatically generated (do not edit) -->
 
-<!-- START -->
 * [IsleGlobals](reference/IsleGlobals.md)
 * [LoanManager](reference/LoanManager.md)
 * [LoanManagerStorage](reference/LoanManagerStorage.md)
@@ -41,9 +37,9 @@
 * [ReceivableStorage](reference/ReceivableStorage.md)
 * [WithdrawalManager](reference/WithdrawalManager.md)
 * [WithdrawalManagerStorage](reference/WithdrawalManagerStorage.md)
-* abstracts
+* [abstracts](reference/abstracts/README.md)
   * [Adminable](reference/abstracts/Adminable.md)
-* interfaces
+* [interfaces](reference/interfaces/README.md)
   * [IAdminable](reference/interfaces/IAdminable.md)
   * [IIsleGlobals](reference/interfaces/IIsleGlobals.md)
   * [IIsleGlobalsEvents](reference/interfaces/IIsleGlobalsEvents.md)
@@ -57,18 +53,17 @@
   * [IReceivableEvent](reference/interfaces/IReceivableEvent.md)
   * [IWithdrawalManager](reference/interfaces/IWithdrawalManager.md)
   * [IWithdrawalManagerStorage](reference/interfaces/IWithdrawalManagerStorage.md)
-  * pool
+  * [pool](reference/interfaces/pool/README.md)
     * [IPoolConfiguratorEvents](reference/interfaces/pool/IPoolConfiguratorEvents.md)
     * [IPoolConfiguratorStorage](reference/interfaces/pool/IPoolConfiguratorStorage.md)
-* libraries
+* [libraries](reference/libraries/README.md)
   * [Errors](reference/libraries/Errors.md)
   * [PoolDeployer](reference/libraries/PoolDeployer.md)
-  * types
+  * [types](reference/libraries/types/README.md)
     * [Globals](reference/libraries/types/Globals.md)
     * [Loan](reference/libraries/types/Loan.md)
     * [Receivable](reference/libraries/types/Receivable.md)
     * [WithdrawalManager](reference/libraries/types/WithdrawalManager.md)
-  * upgradability
+  * [upgradability](reference/libraries/upgradability/README.md)
     * [UUPSProxy](reference/libraries/upgradability/UUPSProxy.md)
     * [VersionedInitializable](reference/libraries/upgradability/VersionedInitializable.md)
-<!-- END -->
