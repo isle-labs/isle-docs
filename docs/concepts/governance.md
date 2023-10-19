@@ -18,7 +18,7 @@ Anyone can participate in governance by making proposals, discussing them, and p
 
 This is a place where community members can make and discuss proposals.
 
-## Governance Council
+### Governance Council
 
 The governance council of Isle has been set up to execute on-chain transactions on behalf of the results of community votes. The Isle Council is a 3-of-5 multisig with 5 members representing all stakeholders participating in the protocol.
 
@@ -26,25 +26,21 @@ Members of the governance council will be released after the protocol launches o
 
 ## Governance Parameters
 
-{% hint style="info" %}
-Different from pool parameters which are managed by **Pool Admins**. These parameters are set to be protocol-wide and affect each pool.
-{% endhint %}
+These are the list of parameters that will be managed and set by the governor
 
-The following parameters that are configured by the governor.
+### Pool Configuration
 
-### PoolAdmin
-
-* `ownedPoolConfigurator`: the pool configurators associated with each pool admin
-
-### Pool Configurator
-
-* `maxCoverLiquidation`: the max liquidation of the pool admin's cover
-* `minCover`: the minimum cover required for the pool&#x20;
+* `maxCoverLiquidation`: the maximum liquidation of the pool admin's cover in the event of a default (e.g. 10% means the protocol liquidate at most 10% of the pool cover at the event of a default)
+* `minCover`: the minimum pool cover size required for the pool
 * `poolLimit`: The maximum size of the pool
 
-### Global
+### Global Configuration
 
-* `isCollateralAsset`: a whitelist of valid collateral assets
+* `isReceivableAsset`: a whitelist of valid receivable assets
 * `isPoolAsset`: a whitelist of valid pool assets
+* `isPoolAdmin`: a whitelist of valid pool admins
 * `isleVault`: address of the **Isle vault**
-* `protocolFee`: the global fee as a percentage of interest that is charged
+* `protocolFee`: the global fee as a percentage of interest earned
+* Emergency pausing
+  * `contractPaused`: whether the contract is paused
+  * `isFunctionPaused`:  whether the function of a contract is paused

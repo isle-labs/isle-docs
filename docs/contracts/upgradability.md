@@ -2,7 +2,7 @@
 
 ## Overview
 
-All upgradability is controlled by the governor.&#x20;
+The governor is responsible for upgrading contracts when required.
 
 ## Contracts
 
