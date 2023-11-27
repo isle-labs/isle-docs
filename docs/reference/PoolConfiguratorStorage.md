@@ -58,6 +58,5 @@ struct Config {
     bool openToPublic;
     uint24 adminFee;
     uint32 gracePeriod;
-    uint96 baseRate;
 }
 ```

@@ -6,7 +6,7 @@ description: The key to the successful operation of pools
 
 ## Overview
 
-Pool Admins are asset specialists and credit experts who manage pools to attract global capital to  provide funding for the supply chain. (If you'd like to explore becoming a Pool Admin, please connect with the **Isle Team**)
+Pool Admins are asset specialists and credit experts who manage pools to attract global capital to provide funding for the supply chain. (If you'd like to explore becoming a Pool Admin, please connect with the **Isle Team**)
 
 Each pool will be managed by a Pool Admin, who is responsible for the following
 
@@ -23,11 +23,11 @@ A pool is an [**ERC4626**](https://erc4626.info/) smart contract through which l
 
 The Pool Admin is responsible for setting and updating these parameters after the pool is created.
 
-* **Base Rate**: The base annual interest rate assumed in this pool (e.g. 5%)
-* **Pool Admin Fee**: The fee as a percentage of total interest repaid that will be distributed to the Pool Admin (e.g. 10%)
-* **Is Open to Public**:&#x20;
-  * Permissioned: only lenders added to the whitelist can deposit liquidity
-  * Permissionless: anyone can deposit liquidity &#x20;
+- **Base Rate**: The base annual interest rate assumed in this pool (e.g. 5%)
+- **Pool Admin Fee**: The fee as a percentage of total interest repaid that will be distributed to the Pool Admin (e.g. 10%)
+- **Is Open to Public**:&#x20;
+  - Permissioned: only lenders added to the whitelist can deposit liquidity
+  - Permissionless: anyone can deposit liquidity &#x20;
 
 {% hint style="info" %}
 Note that when the parameters are updated, it will only affect new loans that are created afterwards but not the loans that have already been created.

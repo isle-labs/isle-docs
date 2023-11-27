@@ -42,7 +42,7 @@ flowchart LR;
   PM -- "fundLoan" --> LM
   LM -- "requestFunds" --> PC
   PC -- "transferFrom" --> P
-  P -- "transferFunds" --> LM  
+  P -- "transferFunds" --> LM
 ```
 
 #### Seller withdraws funds by submitting the invoice
@@ -54,7 +54,7 @@ flowchart LR
   S -- "withdrawFunds" --> LM
   S -- "transferReceivables" --> LM
   LM -- "transferFunds" --> S
-  
+
 ```
 
 #### Buyer repays loan
@@ -127,10 +127,9 @@ flowchart LR;
   PA -- "setBuyer" --> PC
   PA -- "setValidSeller" --> PC
   PA -- "setValidLender" --> PC
-  PA -- "setBaseRate" --> PC
   PA -- "setOpenToPublic" --> PC
   PA -- "setAdminFee" --> PC
-  
+
 ```
 
 ```mermaid

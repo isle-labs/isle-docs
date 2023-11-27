@@ -25,7 +25,7 @@ function buyer() external view returns (address buyer_);
 ### config
 
 ```solidity
-function config() external view returns (bool openToPublic_, uint24 adminFee_, uint32 gracePeriod_, uint96 baseRate_);
+function config() external view returns (bool openToPublic_, uint24 adminFee_, uint32 gracePeriod_);
 ```
 
 ### poolCover

@@ -20,18 +20,18 @@ We expect buyers and the Pool Admin to negotiate terms offline so as to minimize
 
 After buyers negotiate the terms with the **Pool Admin,** they should approve the receivables for funding with the following terms.
 
-* **Collateral ID:** The token ID of the receivable NFT to approve
-* **PrincipalRequested**: The amount of funds for the seller to withdraw
+- **Collateral ID:** The token ID of the receivable NFT to approve
+- **PrincipalRequested**: The amount of funds for the seller to withdraw
 
 $$
 Principal = FaceAmount \times (1 - DiscountRate)
 $$
 
-* **Interest Rate**: The interest rate applied on the principal (must be larger than the **Base Rate** of the pool)
-* **Late Interest Rate Premium**: The extra interest rate that will be applied if the buyer is late on repayment
-* **Grace Period**: The length of time after the due date during which payment may be made with an additional late interest rate premium
-* **Repayment Date:** The repayment date of the receivable
-* **Recipient**: The supplier who is able to withdraw the funds
+- **Interest Rate**: The interest rate applied on the principal (must be larger than the **Base Rate** of the pool)
+- **Late Interest Rate Premium**: The extra interest rate that will be applied if the buyer is late on repayment
+- **Grace Period**: The length of time after the due date during which payment may be made with an additional late interest rate premium
+- **Repayment Date:** The repayment date of the receivable
+- **Recipient**: The supplier who is able to withdraw the funds
 
 {% hint style="info" %}
 **Discount Rate** will be determined in the negotiation process and should typically be in the range of 0% \~ 50% depending on the industry of the buyer and seller.
@@ -58,11 +58,11 @@ Before the loan expires, the buyer will have to repay the loan before the repaym
 
 Let's say that a buyer has a loan with the following terms
 
-* Principal: $140,000
-* Interest Rate: 10%
-* Late Interest Rate Premium: 5%
-* Start Date: 2023/8/1
-* Repayment Date: 2023/9/1
+- Principal: $140,000
+- Interest Rate: 10%
+- Late Interest Rate Premium: 5%
+- Start Date: 2023/8/1
+- Repayment Date: 2023/9/1
 
 _Payment before expiration:_
 

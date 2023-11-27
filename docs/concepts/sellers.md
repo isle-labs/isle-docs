@@ -12,11 +12,11 @@ Sellers are companies that will benefit from getting paid early to finance their
 
 Any seller or buyer is allowed to mint receivable NFTs, which represent the rights and obligations between buyers and sellers. It should contain the following information:
 
-* **Owner:** The owner of the receivable, which should be the seller when it is first minted
-* **Buyer:** The company who received the goods and has the obligation to pay
-* **Seller:** The company who sold the goods and has the right to be paid
-* **Face Amount**: The amount due for payment at the expiration date
-* **Repayment Date**: The expected date of repayment for the receivable
+- **Owner:** The owner of the receivable, which should be the seller when it is first minted
+- **Buyer:** The company who received the goods and has the obligation to pay
+- **Seller:** The company who sold the goods and has the right to be paid
+- **Face Amount**: The amount due for payment at the expiration date
+- **Repayment Date**: The expected date of repayment for the receivable
 
 ## Supplier Onboarding
 

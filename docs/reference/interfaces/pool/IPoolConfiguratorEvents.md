@@ -60,14 +60,6 @@ Emitted when the grace period of the pool is set
 event GracePeriodSet(uint256 gracePeriod_);
 ```
 
-### BaseRateSet
-
-Emitted when the base rate of the pool is set
-
-```solidity
-event BaseRateSet(uint96 baseRate_);
-```
-
 ### RedeemProcessed
 
 Emitted when a redeem is processed

@@ -10,9 +10,9 @@ The process of withdrawals is managed by the `WithdrawalManager`. The `withdrawa
 
 If a user missed its withdrawal window or wishes to edit the request, they can update their withdrawal request.&#x20;
 
-* Refresh: This action resubmits the request.
-* Modify: This action modifies the amount of shares that the user wishes to withdraw.
-* Cancel: This action cancels the request.
+- Refresh: This action resubmits the request.
+- Modify: This action modifies the amount of shares that the user wishes to withdraw.
+- Cancel: This action cancels the request.
 
 In all cases, the withdrawal request will be treated as a normal withdrawal request and will have to wait for a minimum of a full withdrawal cycle before the funds can be withdrawn.
 
@@ -34,16 +34,16 @@ During each withdrawal window, the total amount of funds required to satisfy all
 
 If the current shares available for withdrawal is as follows
 
-* User 1: 100 shares
-* User 2: 200 shares
+- User 1: 100 shares
+- User 2: 200 shares
 
 At time point 1 (exchange rate: 1.5)
 
-* Total locked liquidity would be 450
+- Total locked liquidity would be 450
 
 At time point 2 (exchange rate: 1.75)
 
-* Total locked liquidity would be 525
+- Total locked liquidity would be 525
 
 </details>
 
@@ -66,6 +66,3 @@ $$
 ## Configuration Management
 
 The **Pool Admin** can update update the duration of each Withdrawal Cycle and/or Withdrawal Window. This change will only take effect after the current and two following Withdrawal Cycles.&#x20;
-
-
-

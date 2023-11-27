@@ -194,20 +194,6 @@ function setGracePeriod(uint32 gracePeriod_) external override whenNotPaused onl
 | -------------- | -------- | -------------------- |
 | `gracePeriod_` | `uint32` | The new grace period |
 
-### setBaseRate
-
-Sets the base rate for the pool
-
-```solidity
-function setBaseRate(uint96 baseRate_) external override whenNotPaused onlyAdmin;
-```
-
-**Parameters**
-
-| Name        | Type     | Description       |
-| ----------- | -------- | ----------------- |
-| `baseRate_` | `uint96` | The new base rate |
-
 ### requestFunds
 
 Request funds from the pool and fund the loan manager
@@ -383,20 +369,6 @@ function gracePeriod() external view override returns (uint32 gracePeriod_);
 | Name           | Type     | Description                  |
 | -------------- | -------- | ---------------------------- |
 | `gracePeriod_` | `uint32` | The grace period of the pool |
-
-### baseRate
-
-Returns the base rate of the pool
-
-```solidity
-function baseRate() external view override returns (uint96 baseRate_);
-```
-
-**Returns**
-
-| Name        | Type     | Description               |
-| ----------- | -------- | ------------------------- |
-| `baseRate_` | `uint96` | The base rate of the pool |
 
 ### maxDeposit
 

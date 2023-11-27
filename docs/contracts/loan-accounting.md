@@ -60,4 +60,3 @@ where $$domainStart \leq t \leq domainEnd$$&#x20;
 ### In Practice: Advance Payment Accounting
 
 Whenever any interaction is made with the LoanManager, the function `_advanceGlobalPaymentAccounting` is called to account all Loan's **outstanding interest** and to represent the current state at the current timestamp. &#x20;
-
