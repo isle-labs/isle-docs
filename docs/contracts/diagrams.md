@@ -114,6 +114,20 @@ flowchart LR
   P -- "transferFunds" --> LP
 ```
 
+#### Lender remove redemption request
+
+```mermaid
+flowchart LR
+  LP((Lender))
+  P[Pool]
+  PC[PoolConfigurator]
+  WM[WithdrawalManager]
+  LP -- "removeShares" --> P
+  P -- "removeShares" --> PC
+  PC -- "removeShares" --> WM
+  WM -- "transferShares" --> LP
+```
+
 ### Pool Configuration
 
 {% hint style="info" %}
