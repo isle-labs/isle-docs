@@ -90,7 +90,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  LP((LP))
+  LP((Lender))
   P[Pool]
   PC[PoolConfigurator]
   WM[WithdrawalManager]
