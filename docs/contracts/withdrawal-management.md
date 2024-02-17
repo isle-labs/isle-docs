@@ -8,13 +8,27 @@ The process of withdrawals is managed by the `WithdrawalManager`. The `withdrawa
 
 ## Request Updates
 
-If a user missed its withdrawal window or wishes to edit the request, they can update their withdrawal request.&#x20;
+If a user misses their withdrawal window or wishes to modify their withdrawal request, they have several options to update it.&#x20;
 
-- Refresh: This action resubmits the request.
-- Modify: This action modifies the amount of shares that the user wishes to withdraw.
-- Cancel: This action cancels the request.
+### Refresh Action
+**Purpose:** This action allows users to resubmit their withdrawal request with the original amount of shares if they have simply missed the withdrawal window but wish to proceed as initially planned.
 
-In all cases, the withdrawal request will be treated as a normal withdrawal request and will have to wait for a minimum of a full withdrawal cycle before the funds can be withdrawn.
+**How to Perform:** To refresh the request, call `Pool::requestRedeem(0)`. This command resubmits the withdrawal request without altering the amount of shares.
+
+### Modify Action
+**Purpose:** For users looking to adjust the amount of shares in their withdrawal request, the modify action provides the means to either increase or decrease the desired amount.
+
+**How to Perform:**
+- To increase the number of shares, call `requestRedeem(n)` with `n` specifying the new total amount of shares desired.
+- To decrease the number of shares, call `removeShares(n)`, where `n` reflects the number of shares to be removed from the request.
+
+### Cancel Action
+**Purpose:** Users who wish to cancel their withdrawal request entirely can use this action to remove all associated shares, effectively nullifying the request.
+
+**How to Perform:** Execute `removeShares(n)` to cancel the request, where `n` is the total amount of shares initially requested for withdrawal.
+
+
+In all cases, the withdrawal request will be treated as a **normal withdrawal request** and will have to wait for a **minimum of a full withdrawal cycle** before the funds can be withdrawn.
 
 ## Exchange Rate Calculation
 
