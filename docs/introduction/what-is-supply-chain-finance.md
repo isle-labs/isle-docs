@@ -18,6 +18,6 @@ The overall supply chain finance landscape can be roughly differentiated into th
 
 **Isle Finance** is a novel funding solution to cover the needs of suppliers, originated by large buyers, where suppliers can get financed with crypto through buyer-approved invoices on the blockchain.
 
-The following presents a sample business use case where Nike could utilize Lopo Finance to finance its suppliers.
+The following presents a sample business use case where Nike could utilize Isle Finance to finance its suppliers.
 
 <figure><img src="../.gitbook/assets/Flow.png" alt=""><figcaption><p>Sample Business Flow</p></figcaption></figure>

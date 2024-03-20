@@ -23,7 +23,7 @@ The aforementioned issues are particularly severe for small and medium-sized ent
 - **Digital-native Technology**: Despite considerable efforts over the past two decades, digital adoption in supply chain management has been lagging due to the lack of proper digital infrastructure. DeFi is able to serve as a trusted and reliable digital alternative that has the potential to replace most, if not all, of the inefficient paper-based procedures.
 - **Transparent and Trustless**: We believe that _credit_ is going to become more easily verifiable using decentralized technology with the help of increasing DeFi adoption and better oracles. Moreover, as zero-knowledge technology matures, on-chain activities could be both trustless and privacy-enabled. The [Proof of Income landscape](https://blog.spectral.finance/the-state-of-on-chain-proof-of-income/) is especially getting a lot of attention, signaling the ecosystem's optimism in this space.
 
-Therefore, Lopo Finance is here to **bring all real-world supply chain economic activity on chain and foster global economic prosperity with DeFi technology.**
+Therefore, Isle Finance is here to **bring all real-world supply chain economic activity on chain and foster global economic prosperity with DeFi technology.**
 
 ## Providing real-world investment opportunities for DeFi
 

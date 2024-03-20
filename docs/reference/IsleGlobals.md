@@ -7,10 +7,10 @@
 
 ## State Variables
 
-### LOPO_GLOBALS_REVISION
+### ISLE_GLOBALS_REVISION
 
 ```solidity
-uint256 public constant LOPO_GLOBALS_REVISION = 0x1;
+uint256 public constant ISLE_GLOBALS_REVISION = 0x1;
 ```
 
 ### HUNDRED\_

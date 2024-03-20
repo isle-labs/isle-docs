@@ -31,10 +31,10 @@ bytes32 private constant POOL = "POOL";
 bytes32 private constant POOL_CONFIGURATOR = "POOL_CONFIGURATOR";
 ```
 
-### LOPO_GLOBALS
+### ISLE_GLOBALS
 
 ```solidity
-bytes32 private constant LOPO_GLOBALS = "LOPO_GLOBALS";
+bytes32 private constant ISLE_GLOBALS = "ISLE_GLOBALS";
 ```
 
 ### LOAN_MANAGER
