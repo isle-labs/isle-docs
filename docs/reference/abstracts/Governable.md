@@ -1,6 +1,6 @@
 # Governable
 
-[Git Source](https://github.com/isle-labs/isle-docs/tree/main/docs/reference/interfaces/Governable.md)
+[Git Source](https://github.com/isle-labs/isle-docs/tree/main/docs/reference/abstracts)
 
 **Inherits:**
 [IGovernable](/docs/reference/interfaces/IGovernable.md)
@@ -36,7 +36,9 @@ Notes:
 - Does not revert if the governor is the same.
 - This function can potentially leave the contract without an governor, thereby removing any
   functionality that is only available to the governor.
-  Requirements:
+
+Requirements:
+
 - `msg.sender` must be the contract governor.
 
 ```solidity
