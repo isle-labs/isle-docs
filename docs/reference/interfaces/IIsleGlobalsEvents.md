@@ -1,13 +1,15 @@
 # IIsleGlobalsEvents
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference/interfaces)
+[Git Source](https://github.com/isle-labs/isle-docs/tree/main/docs/reference/interfaces)
 
 ## Events
 
 ### Initialized
 
+_The IsleGlobals contract has been initialized._
+
 ```solidity
-event Initialized();
+event event Initialized(address governor_);
 ```
 
 ### IsleVaultSet
@@ -15,7 +17,7 @@ event Initialized();
 _The address for the Isle vault has been set._
 
 ```solidity
-event IsleVaultSet(address indexed previousIsleVault_, address indexed currentIsleVault_);
+event IsleVaultSet(address indexed previousVault_, address indexed newVault_);
 ```
 
 ### ProtocolPausedSet
@@ -52,12 +54,12 @@ _Emitted when the protocol fee has been set._
 event ProtocolFeeSet(uint24 protocolFee_);
 ```
 
-### ValidCollateralAssetSet
+### ValidReceivableAssetSet
 
 _A valid asset was set._
 
 ```solidity
-event ValidCollateralAssetSet(address indexed collateralAsset_, bool isValid_);
+event ValidReceivableAssetSet(address indexed receivableAsset_, bool isValid_);
 ```
 
 ### ValidPoolAssetSet
@@ -74,28 +76,4 @@ _Emitted when a valid pool admin is set._
 
 ```solidity
 event ValidPoolAdminSet(address indexed poolAdmin_, bool isValid_);
-```
-
-### MaxCoverLiquidationSet
-
-_The max liquidation percent for the given pool manager has been set._
-
-```solidity
-event MaxCoverLiquidationSet(address indexed poolManager_, uint24 maxCoverLiquidation_);
-```
-
-### MinCoverSet
-
-_Emitted when the min cover value is set._
-
-```solidity
-event MinCoverSet(address indexed poolConfigurator_, uint104 indexed minCover_);
-```
-
-### PoolLimitSet
-
-_Emitted when the pool limit is set._
-
-```solidity
-event PoolLimitSet(address indexed poolConfigurator_, uint104 poolLimit_);
 ```
