@@ -1,9 +1,8 @@
 # LoanManagerStorage
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/LoanManagerStorage.sol)
 
-**Inherits:**
-[ILoanManagerStorage](/docs/reference/interfaces/ILoanManagerStorage.md)
+**Inherits:** [ILoanManagerStorage](/docs/reference/interfaces/ILoanManagerStorage.md)
 
 ## State Variables
 
@@ -61,16 +60,10 @@ uint128 public override unrealizedLosses;
 uint256 public override issuanceRate;
 ```
 
-### fundsAsset
+### asset
 
 ```solidity
-address public override fundsAsset;
-```
-
-### collateralAsset
-
-```solidity
-address public override collateralAsset;
+address public override asset;
 ```
 
 ### paymentIdOf

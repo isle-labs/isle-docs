@@ -1,9 +1,10 @@
 # LoanManager
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/LoanManager.sol)
 
-**Inherits:**
-[ILoanManager](/docs/reference/interfaces/ILoanManager.md), IERC721Receiver, [LoanManagerStorage](/docs/reference/LoanManagerStorage.md), ReentrancyGuard, [VersionedInitializable](/docs/reference/libraries/upgradability/VersionedInitializable.md)
+**Inherits:** [ILoanManager](/docs/reference/interfaces/ILoanManager.md), IERC721Receiver,
+[LoanManagerStorage](/docs/reference/LoanManagerStorage.md), ReentrancyGuard,
+[VersionedInitializable](/docs/reference/libraries/upgradability/VersionedInitializable.md)
 
 ## State Variables
 
@@ -42,25 +43,14 @@ IPoolAddressesProvider public immutable ADDRESSES_PROVIDER;
 ### constructor
 
 ```solidity
-constructor(IPoolAddressesProvider provider);
+constructor(IPoolAddressesProvider provider_);
 ```
 
 ### initialize
 
-Initializes the Loan Manager.
-
-_Function is invoked by the proxy contract when the Loan Manager Contract is added to the
-PoolAddressesProvider of the market_
-
 ```solidity
-function initialize(IPoolAddressesProvider provider_) external virtual initializer;
+function initialize(address asset_) external override initializer;
 ```
-
-**Parameters**
-
-| Name        | Type                     | Description                              |
-| ----------- | ------------------------ | ---------------------------------------- |
-| `provider_` | `IPoolAddressesProvider` | The address of the PoolAddressesProvider |
 
 ### whenNotPaused
 
@@ -86,6 +76,14 @@ _Can only be called by the Pool Admin_
 modifier onlyPoolAdmin();
 ```
 
+### onlyPoolConfigurator
+
+_Can only be called by the PoolConfigurator_
+
+```solidity
+modifier onlyPoolConfigurator();
+```
+
 ### getRevision
 
 Returns the revision number of the contract
@@ -93,7 +91,7 @@ Returns the revision number of the contract
 _Needs to be defined in the inherited class as a constant._
 
 ```solidity
-function getRevision() internal pure virtual override returns (uint256 revision_);
+function getRevision() public pure virtual override returns (uint256 revision_);
 ```
 
 **Returns**
@@ -102,9 +100,20 @@ function getRevision() internal pure virtual override returns (uint256 revision_
 | ----------- | --------- | ------------------- |
 | `revision_` | `uint256` | The revision number |
 
+### onERC721Received
+
+_Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom} by `operator` from
+`from`, this function is called. It must return its Solidity selector to confirm the token transfer. If any other value
+is returned or the interface is not implemented by the recipient, the transfer will be reverted. The selector can be
+obtained in Solidity with `IERC721Receiver.onERC721Received.selector`._
+
+```solidity
+function onERC721Received(address, address, uint256, bytes calldata) external pure override returns (bytes4);
+```
+
 ### getLoanInfo
 
-Gets the loan info
+Gets the loan info.
 
 ```solidity
 function getLoanInfo(uint16 loanId_) external view returns (Loan.Info memory loan_);
@@ -112,19 +121,19 @@ function getLoanInfo(uint16 loanId_) external view returns (Loan.Info memory loa
 
 **Parameters**
 
-| Name      | Type     | Description        |
-| --------- | -------- | ------------------ |
-| `loanId_` | `uint16` | The id of the loan |
+| Name      | Type     | Description         |
+| --------- | -------- | ------------------- |
+| `loanId_` | `uint16` | The id of the loan. |
 
 **Returns**
 
-| Name    | Type        | Description                               |
-| ------- | ----------- | ----------------------------------------- |
-| `loan_` | `Loan.Info` | Struct that contains the info of the loan |
+| Name    | Type        | Description                                |
+| ------- | ----------- | ------------------------------------------ |
+| `loan_` | `Loan.Info` | Struct that contains the info of the loan. |
 
 ### accruedInterest
 
-Gets the amounf of interest up until this point in time
+Gets the amount of interest up until this point in time.
 
 ```solidity
 function accruedInterest() public view override returns (uint256 accruedInterest_);
@@ -132,13 +141,13 @@ function accruedInterest() public view override returns (uint256 accruedInterest
 
 **Returns**
 
-| Name               | Type      | Description                                                |
-| ------------------ | --------- | ---------------------------------------------------------- |
-| `accruedInterest_` | `uint256` | The amount of accrued interest up until this point in time |
+| Name               | Type      | Description                                                 |
+| ------------------ | --------- | ----------------------------------------------------------- |
+| `accruedInterest_` | `uint256` | The amount of accrued interest up until this point in time. |
 
 ### assetsUnderManagement
 
-Gets the total assets under management
+Gets the total assets under management.
 
 ```solidity
 function assetsUnderManagement() public view override returns (uint256 assetsUnderManagement_);
@@ -146,16 +155,18 @@ function assetsUnderManagement() public view override returns (uint256 assetsUnd
 
 **Returns**
 
-| Name                     | Type      | Description                       |
-| ------------------------ | --------- | --------------------------------- |
-| `assetsUnderManagement_` | `uint256` | The total assets under management |
+| Name                     | Type      | Description                                 |
+| ------------------------ | --------- | ------------------------------------------- |
+| `assetsUnderManagement_` | `uint256` | The total value of assets under management. |
 
 ### getLoanPaymentDetailedBreakdown
 
-Gets the detailed payment breakdown of a loan up until this point in time
+Gets the detailed payment breakdown of a loan up until this point in time.
 
 ```solidity
-function getLoanPaymentDetailedBreakdown(uint16 loanId_)
+function getLoanPaymentDetailedBreakdown(
+    uint16 loanId_
+)
     public
     view
     override
@@ -164,20 +175,20 @@ function getLoanPaymentDetailedBreakdown(uint16 loanId_)
 
 **Parameters**
 
-| Name      | Type     | Description        |
-| --------- | -------- | ------------------ |
-| `loanId_` | `uint16` | The id of the loan |
+| Name      | Type     | Description         |
+| --------- | -------- | ------------------- |
+| `loanId_` | `uint16` | The id of the loan. |
 
 **Returns**
 
-| Name         | Type         | Description                                                                                   |
-| ------------ | ------------ | --------------------------------------------------------------------------------------------- |
-| `principal_` | `uint256`    | The principal due for the loan                                                                |
-| `interest_`  | `uint256[2]` | Interest Parameter [0]: The interest due for the loan [1]: The late interest due for the loan |
+| Name         | Type         | Description                                                                                                |
+| ------------ | ------------ | ---------------------------------------------------------------------------------------------------------- |
+| `principal_` | `uint256`    | The principal due for the loan.                                                                            |
+| `interest_`  | `uint256[2]` | Interest Parameter:</br> [0]: The interest due for the loan.</br> [1]: The late interest due for the loan. |
 
 ### getLoanPaymentBreakdown
 
-Gets the payment breakdown of a loan up until this point in time
+Gets the payment breakdown of a loan up until this point in time.
 
 ```solidity
 function getLoanPaymentBreakdown(uint16 loanId_) public view override returns (uint256 principal_, uint256 interest_);
@@ -185,38 +196,32 @@ function getLoanPaymentBreakdown(uint16 loanId_) public view override returns (u
 
 **Parameters**
 
-| Name      | Type     | Description        |
-| --------- | -------- | ------------------ |
-| `loanId_` | `uint16` | The id of the loan |
+| Name      | Type     | Description         |
+| --------- | -------- | ------------------- |
+| `loanId_` | `uint16` | The id of the loan. |
 
 **Returns**
 
-| Name         | Type      | Description                    |
-| ------------ | --------- | ------------------------------ |
-| `principal_` | `uint256` | The principal due for the loan |
-| `interest_`  | `uint256` | The interest due for the loan  |
-
-### onERC721Received
-
-```solidity
-function onERC721Received(address, address, uint256, bytes calldata) external pure override returns (bytes4);
-```
+| Name         | Type      | Description                          |
+| ------------ | --------- | ------------------------------------ |
+| `principal_` | `uint256` | The principal due for the loan.      |
+| `interest_`  | `uint256` | The total interest due for the loan. |
 
 ### updateAccounting
 
-Manually updates the accounting state of the pool
+Manually updates the accounting state of the pool.
 
 ```solidity
 function updateAccounting() external whenNotPaused onlyPoolAdminOrGovernor;
 ```
 
-### approveLoan
+### requestLoan
 
-Approves loan to be created with the following terms.
+Used by buyer to request a loan from the pool with the following terms.
 
 ```solidity
-function approveLoan(
-    address collateralAsset_,
+function requestLoan(
+    address receivableAsset_,
     uint256 receivablesTokenId_,
     uint256 gracePeriod_,
     uint256 principalRequested_,
@@ -230,23 +235,23 @@ function approveLoan(
 
 **Parameters**
 
-| Name                  | Type         | Description                                                        |
-| --------------------- | ------------ | ------------------------------------------------------------------ |
-| `collateralAsset_`    | `address`    |                                                                    |
-| `receivablesTokenId_` | `uint256`    | Token ID of the receivable that would be used as collateral        |
-| `gracePeriod_`        | `uint256`    | Grace period for the loan                                          |
-| `principalRequested_` | `uint256`    | Amount of principal approved by the buyer                          |
-| `rates_`              | `uint256[2]` | Rates parameters: [0]: interestRate, [1]: lateInterestPremiumRate, |
+| Name                  | Type         | Description                                                                  |
+| --------------------- | ------------ | ---------------------------------------------------------------------------- |
+| `receivableAsset_`    | `address`    |                                                                              |
+| `receivablesTokenId_` | `uint256`    | Token ID of the receivable that would be used as collateral.                 |
+| `gracePeriod_`        | `uint256`    | Grace period of the loan.                                                    |
+| `principalRequested_` | `uint256`    | Amount of principal requested by the buyer.                                  |
+| `rates_`              | `uint256[2]` | Rates parameters:</br> [0]: interestRate.</br> [1]: lateInterestPremiumRate. |
 
 **Returns**
 
-| Name      | Type     | Description                    |
-| --------- | -------- | ------------------------------ |
-| `loanId_` | `uint16` | Id of the loan that is created |
+| Name      | Type     | Description                     |
+| --------- | -------- | ------------------------------- |
+| `loanId_` | `uint16` | Id of the loan that is created. |
 
 ### fundLoan
 
-Funds the loan
+Used by the pool admin to fund the loan requested by the buyer.
 
 ```solidity
 function fundLoan(uint16 loanId_) external override nonReentrant whenNotPaused onlyPoolAdmin;
@@ -254,13 +259,13 @@ function fundLoan(uint16 loanId_) external override nonReentrant whenNotPaused o
 
 **Parameters**
 
-| Name      | Type     | Description        |
-| --------- | -------- | ------------------ |
-| `loanId_` | `uint16` | The id of the loan |
+| Name      | Type     | Description         |
+| --------- | -------- | ------------------- |
+| `loanId_` | `uint16` | The id of the loan. |
 
 ### repayLoan
 
-Repays the loan. (note that the loan can be repaid early but not partially)
+Repays the loan (note that the loan can be repaid early but not partially).
 
 ```solidity
 function repayLoan(uint16 loanId_) external override whenNotPaused returns (uint256 principal_, uint256 interest_);
@@ -268,36 +273,35 @@ function repayLoan(uint16 loanId_) external override whenNotPaused returns (uint
 
 **Parameters**
 
-| Name      | Type     | Description             |
-| --------- | -------- | ----------------------- |
-| `loanId_` | `uint16` | Id of the loan to repay |
+| Name      | Type     | Description              |
+| --------- | -------- | ------------------------ |
+| `loanId_` | `uint16` | Id of the loan to repay. |
 
 **Returns**
 
-| Name         | Type      | Description             |
-| ------------ | --------- | ----------------------- |
-| `principal_` | `uint256` | Principal amount repaid |
-| `interest_`  | `uint256` | Interest amount repaid  |
+| Name         | Type      | Description              |
+| ------------ | --------- | ------------------------ |
+| `principal_` | `uint256` | Principal amount repaid. |
+| `interest_`  | `uint256` | Interest amount repaid.  |
 
 ### withdrawFunds
 
-Withdraw the funds from a loan.
+Used by sellers to withdraw funds from a loan.
 
 ```solidity
-function withdrawFunds(uint16 loanId_, address destination_, uint256 amount_) external override whenNotPaused;
+function withdrawFunds(uint16 loanId_, address destination_) external override whenNotPaused;
 ```
 
 **Parameters**
 
-| Name           | Type      | Description                           |
-| -------------- | --------- | ------------------------------------- |
-| `loanId_`      | `uint16`  | Id of the loan to withdraw funds from |
-| `destination_` | `address` | The destination address for the funds |
-| `amount_`      | `uint256` | The amount to withdraw                |
+| Name           | Type      | Description                            |
+| -------------- | --------- | -------------------------------------- |
+| `loanId_`      | `uint16`  | Id of the loan to withdraw funds from. |
+| `destination_` | `address` | The destination address for the funds. |
 
 ### impairLoan
 
-Impairs the loan
+Impairs the loan.
 
 ```solidity
 function impairLoan(uint16 loanId_) external override whenNotPaused onlyPoolAdminOrGovernor;
@@ -305,13 +309,13 @@ function impairLoan(uint16 loanId_) external override whenNotPaused onlyPoolAdmi
 
 **Parameters**
 
-| Name      | Type     | Description        |
-| --------- | -------- | ------------------ |
-| `loanId_` | `uint16` | The id of the loan |
+| Name      | Type     | Description         |
+| --------- | -------- | ------------------- |
+| `loanId_` | `uint16` | The id of the loan. |
 
 ### removeLoanImpairment
 
-Removes the impairment on the loan
+Removes the impairment on the loan.
 
 ```solidity
 function removeLoanImpairment(uint16 loanId_) external override nonReentrant whenNotPaused onlyPoolAdminOrGovernor;
@@ -319,35 +323,37 @@ function removeLoanImpairment(uint16 loanId_) external override nonReentrant whe
 
 **Parameters**
 
-| Name      | Type     | Description        |
-| --------- | -------- | ------------------ |
-| `loanId_` | `uint16` | The id of the loan |
+| Name      | Type     | Description         |
+| --------- | -------- | ------------------- |
+| `loanId_` | `uint16` | The id of the loan. |
 
 ### triggerDefault
 
-Triggers the default of a loan
+Triggers the default of a loan.
 
 ```solidity
-function triggerDefault(uint16 loanId_)
+function triggerDefault(
+    uint16 loanId_
+)
     external
     override
     whenNotPaused
-    onlyPoolAdmin
+    onlyPoolConfigurator
     returns (uint256 remainingLosses_, uint256 protocolFees_);
 ```
 
 **Parameters**
 
-| Name      | Type     | Description                          |
-| --------- | -------- | ------------------------------------ |
-| `loanId_` | `uint16` | The id of the loan that is triggered |
+| Name      | Type     | Description                           |
+| --------- | -------- | ------------------------------------- |
+| `loanId_` | `uint16` | The id of the loan that is triggered. |
 
 **Returns**
 
-| Name               | Type      | Description                    |
-| ------------------ | --------- | ------------------------------ |
-| `remainingLosses_` | `uint256` | The amount of remaining losses |
-| `protocolFees_`    | `uint256` | The amount of protocol fees    |
+| Name               | Type      | Description                     |
+| ------------------ | --------- | ------------------------------- |
+| `remainingLosses_` | `uint256` | The amount of remaining losses. |
+| `protocolFees_`    | `uint256` | The amount of protocol fees.    |
 
 ### \_getIssuance
 
@@ -447,30 +453,6 @@ function _pool() internal view returns (address pool_);
 function _vault() internal view returns (address vault_);
 ```
 
-### \_updateInterestAccounting
-
-```solidity
-function _updateInterestAccounting(int256 accountedInterestAdjustment_, int256 issuanceRateAdjustment_) internal;
-```
-
-### \_updateUnrealizedLosses
-
-```solidity
-function _updateUnrealizedLosses(int256 lossesAdjustment_) internal;
-```
-
-### \_updatePrincipalOut
-
-```solidity
-function _updatePrincipalOut(int256 principalOutAdjustment_) internal;
-```
-
-### \_clearLoanAccounting
-
-```solidity
-function _clearLoanAccounting(uint16 loanId_) internal;
-```
-
 ### \_advanceGlobalPaymentAccounting
 
 ```solidity
@@ -518,7 +500,9 @@ function _getDefaultInterestAndFees(
 ### \_getInterestAndFeesFromLiquidationInfo
 
 ```solidity
-function _getInterestAndFeesFromLiquidationInfo(uint16 loanId_)
+function _getInterestAndFeesFromLiquidationInfo(
+    uint16 loanId_
+)
     internal
     view
     returns (uint256 netInterest_, uint256 netLateInterest_, uint256 protocolFees_);
@@ -626,6 +610,12 @@ function _revertIfNotPoolAdminOrGovernor() internal view;
 
 ```solidity
 function _revertIfNotPoolAdmin() internal view;
+```
+
+### \_revertIfNotPoolConfigurator
+
+```solidity
+function _revertIfNotPoolConfigurator() internal view;
 ```
 
 ### \_revertIfCallerNotReceivableBuyer

@@ -1,6 +1,6 @@
 # IPoolAddressesProvider
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference/interfaces)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/interfaces/IPoolAddressesProvider.sol)
 
 Defines the basic interface for a Pool Addresses Provider.
 
@@ -8,7 +8,7 @@ Defines the basic interface for a Pool Addresses Provider.
 
 ### getMarketId
 
-Returns the id of the Aave market to which this contract points to.
+Retrieves the identifier of the Isle market associated with this contract.
 
 ```solidity
 function getMarketId() external view returns (string memory);
@@ -16,16 +16,15 @@ function getMarketId() external view returns (string memory);
 
 **Returns**
 
-| Name     | Type     | Description   |
-| -------- | -------- | ------------- |
-| `<none>` | `string` | The market id |
+| Name     | Type     | Description                   |
+| -------- | -------- | ----------------------------- |
+| `<none>` | `string` | The identifier of the market. |
 
 ### setMarketId
 
-Associates an id with a specific PoolAddressesProvider.
+Links a new market identifier to this PoolAddressesProvider.
 
-_This can be used to create an onchain registry of PoolAddressesProviders to
-identify and validate multiple Aave markets._
+_Useful for creating a registry of PoolAddressesProviders for multiple Isle markets._
 
 ```solidity
 function setMarketId(string calldata newMarketId) external;
@@ -33,17 +32,17 @@ function setMarketId(string calldata newMarketId) external;
 
 **Parameters**
 
-| Name          | Type     | Description   |
-| ------------- | -------- | ------------- |
-| `newMarketId` | `string` | The market id |
+| Name          | Type     | Description                |
+| ------------- | -------- | -------------------------- |
+| `newMarketId` | `string` | The new market identifier. |
 
 ### getAddress
 
-Returns an address by its identifier.
+Fetches an address associated with a given identifier.
 
-_The returned address might be an EOA or a contract, potentially proxied_
+_Can return either a direct contract address or a proxy address._
 
-_It returns ZERO if there is no registered address with the given id_
+_Returns address(0) if no address is registered with the given identifier._
 
 ```solidity
 function getAddress(bytes32 id) external view returns (address);
@@ -51,24 +50,23 @@ function getAddress(bytes32 id) external view returns (address);
 
 **Parameters**
 
-| Name | Type      | Description |
-| ---- | --------- | ----------- |
-| `id` | `bytes32` | The id      |
+| Name | Type      | Description                                 |
+| ---- | --------- | ------------------------------------------- |
+| `id` | `bytes32` | The identifier of the contract to retrieve. |
 
 **Returns**
 
-| Name     | Type      | Description                                        |
-| -------- | --------- | -------------------------------------------------- |
-| `<none>` | `address` | The address of the registered for the specified id |
+| Name     | Type      | Description                                           |
+| -------- | --------- | ----------------------------------------------------- |
+| `<none>` | `address` | The address associated with the specified identifier. |
 
 ### setAddressAsProxy
 
-General function to update the implementation of a proxy registered with
-certain `id`. If there is no proxy registered, it will instantiate one and
-set as implementation the `newImplementationAddress`.
+Updates or initializes a proxy for a given identifier with a new implementation address.
 
-_IMPORTANT Use this function carefully, only for ids that don't have an explicit
-setter function, in order to avoid unexpected consequences_
+_Use with caution for identifiers without dedicated setter functions to prevent unintended effects._
+
+_Only use for identifiers POOL_CONFIGURATOR, LOAN_MANAGER, WITHDRAWAL_MANAGER, or ISLE_GLOBALS._
 
 ```solidity
 function setAddressAsProxy(bytes32 id, address newImplementationAddress, bytes calldata params) external;
@@ -78,15 +76,17 @@ function setAddressAsProxy(bytes32 id, address newImplementationAddress, bytes c
 
 | Name                       | Type      | Description                                           |
 | -------------------------- | --------- | ----------------------------------------------------- |
-| `id`                       | `bytes32` | The id                                                |
-| `newImplementationAddress` | `address` | The address of the new implementation                 |
-| `params`                   | `bytes`   | The intialization parameters for the proxied contract |
+| `id`                       | `bytes32` | The identifier of the contract to update.             |
+| `newImplementationAddress` | `address` | The address of the new implementation.                |
+| `params`                   | `bytes`   | The initialization parameters for the proxy contract. |
 
 ### setAddress
 
-Sets an address for an id replacing the address saved in the addresses map.
+Directly sets a new address for a given identifier, replacing the current address.
 
-_IMPORTANT Use this function carefully, as it will do a hard replacement_
+_Use with caution as this will overwrite the existing address without any checks._
+
+_Only use for identifiers POOL_CONFIGURATOR, LOAN_MANAGER, WITHDRAWAL_MANAGER, or ISLE_GLOBALS._
 
 ```solidity
 function setAddress(bytes32 id, address newAddress) external;
@@ -94,14 +94,14 @@ function setAddress(bytes32 id, address newAddress) external;
 
 **Parameters**
 
-| Name         | Type      | Description        |
-| ------------ | --------- | ------------------ |
-| `id`         | `bytes32` | The id             |
-| `newAddress` | `address` | The address to set |
+| Name         | Type      | Description                                       |
+| ------------ | --------- | ------------------------------------------------- |
+| `id`         | `bytes32` | The identifier for which to set the address.      |
+| `newAddress` | `address` | The new address to associate with the identifier. |
 
 ### getPoolConfigurator
 
-Returns the address of the PoolConfigurator proxy.
+Retrieves the address of the PoolConfigurator proxy.
 
 ```solidity
 function getPoolConfigurator() external view returns (address);
@@ -109,14 +109,13 @@ function getPoolConfigurator() external view returns (address);
 
 **Returns**
 
-| Name     | Type      | Description                        |
-| -------- | --------- | ---------------------------------- |
-| `<none>` | `address` | The PoolConfigurator proxy address |
+| Name     | Type      | Description                                |
+| -------- | --------- | ------------------------------------------ |
+| `<none>` | `address` | The address of the PoolConfigurator proxy. |
 
 ### setPoolConfiguratorImpl
 
-Updates the implementation of the PoolConfigurator, or creates a proxy
-setting the new `PoolConfigurator` implementation when the function is called for the first time.
+Sets or initializes the PoolConfigurator proxy with a new implementation.
 
 ```solidity
 function setPoolConfiguratorImpl(address newPoolConfiguratorImpl, bytes calldata params) external;
@@ -124,14 +123,14 @@ function setPoolConfiguratorImpl(address newPoolConfiguratorImpl, bytes calldata
 
 **Parameters**
 
-| Name                      | Type      | Description                             |
-| ------------------------- | --------- | --------------------------------------- |
-| `newPoolConfiguratorImpl` | `address` | The new PoolConfigurator implementation |
-| `params`                  | `bytes`   |                                         |
+| Name                      | Type      | Description                                             |
+| ------------------------- | --------- | ------------------------------------------------------- |
+| `newPoolConfiguratorImpl` | `address` | The address of the new PoolConfigurator implementation. |
+| `params`                  | `bytes`   | The initialization parameters for the PoolConfigurator. |
 
 ### getLoanManager
 
-Returns the address of the LoanManager proxy.
+Retrieves the address of the LoanManager proxy.
 
 ```solidity
 function getLoanManager() external view returns (address);
@@ -139,28 +138,28 @@ function getLoanManager() external view returns (address);
 
 **Returns**
 
-| Name     | Type      | Description                   |
-| -------- | --------- | ----------------------------- |
-| `<none>` | `address` | The LoanManager proxy address |
+| Name     | Type      | Description                           |
+| -------- | --------- | ------------------------------------- |
+| `<none>` | `address` | The address of the LoanManager proxy. |
 
 ### setLoanManagerImpl
 
-Updates the implementation of the LoanManager, or creates a proxy
-setting the new `LoanManager` implementation when the function is called for the first time.
+Sets or initializes the LoanManager proxy with a new implementation.
 
 ```solidity
-function setLoanManagerImpl(address newLoanManagerImpl) external;
+function setLoanManagerImpl(address newLoanManagerImpl, bytes calldata params) external;
 ```
 
 **Parameters**
 
-| Name                 | Type      | Description                        |
-| -------------------- | --------- | ---------------------------------- |
-| `newLoanManagerImpl` | `address` | The new LoanManager implementation |
+| Name                 | Type      | Description                                        |
+| -------------------- | --------- | -------------------------------------------------- |
+| `newLoanManagerImpl` | `address` | The address of the new LoanManager implementation. |
+| `params`             | `bytes`   | The initialization parameters for the LoanManager. |
 
 ### getWithdrawalManager
 
-Returns the address of the WithdrawalManager proxy.
+Retrieves the address of the WithdrawalManager proxy.
 
 ```solidity
 function getWithdrawalManager() external view returns (address);
@@ -168,14 +167,13 @@ function getWithdrawalManager() external view returns (address);
 
 **Returns**
 
-| Name     | Type      | Description                         |
-| -------- | --------- | ----------------------------------- |
-| `<none>` | `address` | The WithdrawalManager proxy address |
+| Name     | Type      | Description                                 |
+| -------- | --------- | ------------------------------------------- |
+| `<none>` | `address` | The address of the WithdrawalManager proxy. |
 
 ### setWithdrawalManagerImpl
 
-Updates the implementation of the WithdrawalManager, or creates a proxy
-setting the new `WithdrawalManager` implementation when the function is called for the first time.
+Sets or initializes the WithdrawalManager proxy with a new implementation.
 
 ```solidity
 function setWithdrawalManagerImpl(address newWithdrawalManagerImpl, bytes calldata params) external;
@@ -183,14 +181,14 @@ function setWithdrawalManagerImpl(address newWithdrawalManagerImpl, bytes callda
 
 **Parameters**
 
-| Name                       | Type      | Description                              |
-| -------------------------- | --------- | ---------------------------------------- |
-| `newWithdrawalManagerImpl` | `address` | The new WithdrawalManager implementation |
-| `params`                   | `bytes`   |                                          |
+| Name                       | Type      | Description                                              |
+| -------------------------- | --------- | -------------------------------------------------------- |
+| `newWithdrawalManagerImpl` | `address` | The address of the new WithdrawalManager implementation. |
+| `params`                   | `bytes`   | The initialization parameters for the WithdrawalManager. |
 
 ### getIsleGlobals
 
-Returns the address of isle globals.
+Retrieves the address of IsleGlobals.
 
 ```solidity
 function getIsleGlobals() external view returns (address);
@@ -198,13 +196,13 @@ function getIsleGlobals() external view returns (address);
 
 **Returns**
 
-| Name     | Type      | Description             |
-| -------- | --------- | ----------------------- |
-| `<none>` | `address` | The IsleGlobals address |
+| Name     | Type      | Description                 |
+| -------- | --------- | --------------------------- |
+| `<none>` | `address` | The address of IsleGlobals. |
 
 ### setIsleGlobals
 
-Sets an address for IsleGlobals replacing the address saved in the addresses map
+Sets a new address for IsleGlobals, replacing the current address in the registry.
 
 ```solidity
 function setIsleGlobals(address newIsleGlobals) external;
@@ -212,71 +210,122 @@ function setIsleGlobals(address newIsleGlobals) external;
 
 **Parameters**
 
-| Name             | Type      | Description         |
-| ---------------- | --------- | ------------------- |
-| `newIsleGlobals` | `address` | IsleGlobals address |
+| Name             | Type      | Description                      |
+| ---------------- | --------- | -------------------------------- |
+| `newIsleGlobals` | `address` | The new address for IsleGlobals. |
 
 ## Events
 
 ### MarketIdSet
 
-_Emitted when the market identifier is updated._
+_Emitted when the market identifier is changed._
 
 ```solidity
 event MarketIdSet(string indexed oldMarketId, string indexed newMarketId);
 ```
 
+**Parameters**
+
+| Name          | Type     | Description                            |
+| ------------- | -------- | -------------------------------------- |
+| `oldMarketId` | `string` | The previous identifier of the market. |
+| `newMarketId` | `string` | The new identifier of the market.      |
+
 ### PoolConfiguratorUpdated
 
-_Emitted when the pool configurator is updated._
+_Emitted when the address of the PoolConfigurator is updated._
 
 ```solidity
 event PoolConfiguratorUpdated(address indexed oldAddress, address indexed newAddress);
 ```
 
+**Parameters**
+
+| Name         | Type      | Description                                  |
+| ------------ | --------- | -------------------------------------------- |
+| `oldAddress` | `address` | The former address of the PoolConfigurator.  |
+| `newAddress` | `address` | The updated address of the PoolConfigurator. |
+
 ### LoanManagerUpdated
 
-_Emitted when the loan manager is updated._
+_Emitted when the address of the LoanManager is updated._
 
 ```solidity
 event LoanManagerUpdated(address indexed oldAddress, address indexed newAddress);
 ```
 
+**Parameters**
+
+| Name         | Type      | Description                             |
+| ------------ | --------- | --------------------------------------- |
+| `oldAddress` | `address` | The former address of the LoanManager.  |
+| `newAddress` | `address` | The updated address of the LoanManager. |
+
 ### WithdrawalManagerUpdated
 
-_Emitted when the withdrawal manager is updated._
+_Emitted when the address of the WithdrawalManager is updated._
 
 ```solidity
 event WithdrawalManagerUpdated(address indexed oldAddress, address indexed newAddress);
 ```
 
+**Parameters**
+
+| Name         | Type      | Description                                   |
+| ------------ | --------- | --------------------------------------------- |
+| `oldAddress` | `address` | The former address of the WithdrawalManager.  |
+| `newAddress` | `address` | The updated address of the WithdrawalManager. |
+
 ### IsleGlobalsUpdated
 
-_Emitted when isle globals is updated._
+_Emitted when the address of IsleGlobals is updated._
 
 ```solidity
 event IsleGlobalsUpdated(address indexed oldAddress, address indexed newAddress);
 ```
 
+**Parameters**
+
+| Name         | Type      | Description                         |
+| ------------ | --------- | ----------------------------------- |
+| `oldAddress` | `address` | The former address of IsleGlobals.  |
+| `newAddress` | `address` | The updated address of IsleGlobals. |
+
 ### ProxyCreated
 
-_Emitted when a new proxy is created._
+_Emitted when a new proxy is created for a contract._
 
 ```solidity
 event ProxyCreated(bytes32 indexed id, address indexed proxyAddress, address indexed implementationAddress);
 ```
 
+**Parameters**
+
+| Name                    | Type      | Description                                                     |
+| ----------------------- | --------- | --------------------------------------------------------------- |
+| `id`                    | `bytes32` | The identifier of the contract.                                 |
+| `proxyAddress`          | `address` | The address of the newly created proxy contract.                |
+| `implementationAddress` | `address` | The address of the implementation contract linked to the proxy. |
+
 ### AddressSet
 
-_Emitted when a new non-proxied contract address is registered._
+_Emitted when a new address is registered for a contract without a proxy._
 
 ```solidity
 event AddressSet(bytes32 indexed id, address indexed oldAddress, address indexed newAddress);
 ```
 
+**Parameters**
+
+| Name         | Type      | Description                                   |
+| ------------ | --------- | --------------------------------------------- |
+| `id`         | `bytes32` | The identifier of the contract.               |
+| `oldAddress` | `address` | The former address of the contract.           |
+| `newAddress` | `address` | The newly registered address of the contract. |
+
 ### AddressSetAsProxy
 
-_Emitted when the implementation of the proxy registered with id is updated_
+_Emitted when the implementation of a registered proxy is updated._
 
 ```solidity
 event AddressSetAsProxy(
@@ -286,3 +335,12 @@ event AddressSetAsProxy(
     address indexed newImplementationAddress
 );
 ```
+
+**Parameters**
+
+| Name                       | Type      | Description                                         |
+| -------------------------- | --------- | --------------------------------------------------- |
+| `id`                       | `bytes32` | The identifier of the contract.                     |
+| `proxyAddress`             | `address` | The address of the proxy contract.                  |
+| `oldImplementationAddress` | `address` | The former address of the implementation contract.  |
+| `newImplementationAddress` | `address` | The updated address of the implementation contract. |

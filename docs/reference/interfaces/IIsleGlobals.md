@@ -1,19 +1,19 @@
 # IIsleGlobals
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference/interfaces)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/interfaces/IIsleGlobals.sol)
 
-**Inherits:**
-[IIsleGlobalsEvents](/docs/reference/interfaces/IIsleGlobalsEvents.md)
+**Inherits:** [IIsleGlobalsEvents](/docs/reference/interfaces/IIsleGlobalsEvents.md),
+[IGovernable](/docs/reference/interfaces/IGovernable.md)
 
-Interface for the IsleGlobals contract
+Interface for the IsleGlobals contract.
 
-This interface provides functions for managing the global settings of the Isle protocol
+This interface provides functions to manage the global configurations of the Isle Protocol.
 
 ## Functions
 
 ### initialize
 
-Initializes the contract
+Initializes the contract.
 
 ```solidity
 function initialize(address governor_) external;
@@ -21,9 +21,9 @@ function initialize(address governor_) external;
 
 **Parameters**
 
-| Name        | Type      | Description                 |
-| ----------- | --------- | --------------------------- |
-| `governor_` | `address` | The address of the governor |
+| Name        | Type      | Description                  |
+| ----------- | --------- | ---------------------------- |
+| `governor_` | `address` | The address of the governor. |
 
 ### setIsleVault
 
@@ -41,7 +41,7 @@ function setIsleVault(address isleVault_) external;
 
 ### setProtocolPaused
 
-Sets the protocol pause.
+Pause or unpause the protocol.
 
 ```solidity
 function setProtocolPaused(bool protocolPaused_) external;
@@ -55,7 +55,7 @@ function setProtocolPaused(bool protocolPaused_) external;
 
 ### setContractPaused
 
-Sets the pause status of a specific contract
+Pause or unpause a specific contract.
 
 ```solidity
 function setContractPaused(address contract_, bool contractPaused_) external;
@@ -63,14 +63,16 @@ function setContractPaused(address contract_, bool contractPaused_) external;
 
 **Parameters**
 
-| Name              | Type      | Description                                             |
-| ----------------- | --------- | ------------------------------------------------------- |
-| `contract_`       | `address` | The address of the contract to set the pause status for |
-| `contractPaused_` | `bool`    | A boolean indicating the pause status of the contract   |
+| Name              | Type      | Description                                              |
+| ----------------- | --------- | -------------------------------------------------------- |
+| `contract_`       | `address` | The address of the contract to set the pause status for. |
+| `contractPaused_` | `bool`    | A boolean indicating the pause status of the contract.   |
 
 ### setFunctionUnpaused
 
-Sets the unpause status of a specific function in a contract
+Unpause or ununpause a specific function in a contract.
+
+Normally used to unpause specific functions when a contract is paused.
 
 ```solidity
 function setFunctionUnpaused(address contract_, bytes4 sig_, bool functionUnpaused_) external;
@@ -78,15 +80,15 @@ function setFunctionUnpaused(address contract_, bytes4 sig_, bool functionUnpaus
 
 **Parameters**
 
-| Name                | Type      | Description                                             |
-| ------------------- | --------- | ------------------------------------------------------- |
-| `contract_`         | `address` | The address of the contract                             |
-| `sig_`              | `bytes4`  | The function signature                                  |
-| `functionUnpaused_` | `bool`    | A boolean indicating the unpause status of the function |
+| Name                | Type      | Description                                            |
+| ------------------- | --------- | ------------------------------------------------------ |
+| `contract_`         | `address` | The address of the contract.                           |
+| `sig_`              | `bytes4`  | The function signature.                                |
+| `functionUnpaused_` | `bool`    | A boolean indicating whether the function is unpaused. |
 
 ### setProtocolFee
 
-Sets the protocol fee
+Sets the protocol fee.
 
 ```solidity
 function setProtocolFee(uint24 protocolFee_) external;
@@ -94,28 +96,28 @@ function setProtocolFee(uint24 protocolFee_) external;
 
 **Parameters**
 
-| Name           | Type     | Description                          |
-| -------------- | -------- | ------------------------------------ |
-| `protocolFee_` | `uint24` | A uint24 indicating the protocol fee |
+| Name           | Type     | Description                                                                   |
+| -------------- | -------- | ----------------------------------------------------------------------------- |
+| `protocolFee_` | `uint24` | A uint24 indicating the protocol fee (100.0000% = 1e6 (6 decimal precision)). |
 
-### setValidCollateralAsset
+### setValidReceivableAsset
 
-Sets the validity of a collateral asset.
+Sets the validity of a receivable asset (should match ERC-721).
 
 ```solidity
-function setValidCollateralAsset(address collateralAsset_, bool isValid_) external;
+function setValidReceivableAsset(address receivableAsset_, bool isValid_) external;
 ```
 
 **Parameters**
 
 | Name               | Type      | Description                                                  |
 | ------------------ | --------- | ------------------------------------------------------------ |
-| `collateralAsset_` | `address` | The address of the collateral asset to set the validity for. |
-| `isValid_`         | `bool`    | A boolean indicating the validity of the collateral asset.   |
+| `receivableAsset_` | `address` | The address of the receivable asset to set the validity for. |
+| `isValid_`         | `bool`    | A boolean indicating the validity of the receivable asset.   |
 
 ### setValidPoolAsset
 
-Sets the validity of the pool asset.
+Sets the validity of the pool asset (should match ERC-20).
 
 ```solidity
 function setValidPoolAsset(address poolAsset_, bool isValid_) external;
@@ -143,54 +145,9 @@ function setValidPoolAdmin(address poolAdmin_, bool isValid_) external;
 | `poolAdmin_` | `address` | The address of the pool admin to set the validity for. |
 | `isValid_`   | `bool`    | A boolean indicating the validity of the pool admin.   |
 
-### setMaxCoverLiquidation
-
-Sets the max cover liquidation that is applied for the pool admin
-
-```solidity
-function setMaxCoverLiquidation(address poolConfigurator_, uint24 maxCoverLiquidation_) external;
-```
-
-**Parameters**
-
-| Name                   | Type      | Description                                                  |
-| ---------------------- | --------- | ------------------------------------------------------------ |
-| `poolConfigurator_`    | `address` | The address of the pool admin                                |
-| `maxCoverLiquidation_` | `uint24`  | The max cover liquidation as a percentage for the pool admin |
-
-### setMinCover
-
-Sets the min cover required for the pool admin.
-
-```solidity
-function setMinCover(address poolConfigurator_, uint104 minCover_) external;
-```
-
-**Parameters**
-
-| Name                | Type      | Description                                |
-| ------------------- | --------- | ------------------------------------------ |
-| `poolConfigurator_` | `address` | The address of the pool admin.             |
-| `minCover_`         | `uint104` | The min cover required for the pool admin. |
-
-### setPoolLimit
-
-Sets the pool limit for the pool configurator
-
-```solidity
-function setPoolLimit(address poolConfigurator_, uint104 poolLimit_) external;
-```
-
-**Parameters**
-
-| Name                | Type      | Description                          |
-| ------------------- | --------- | ------------------------------------ |
-| `poolConfigurator_` | `address` | The address of the pool configurator |
-| `poolLimit_`        | `uint104` | The size limit of the pool           |
-
 ### protocolFee
 
-Returns the protocol fee
+Returns the protocol fee.
 
 ```solidity
 function protocolFee() external view returns (uint24 protocolFee_);
@@ -198,9 +155,9 @@ function protocolFee() external view returns (uint24 protocolFee_);
 
 **Returns**
 
-| Name           | Type     | Description                          |
-| -------------- | -------- | ------------------------------------ |
-| `protocolFee_` | `uint24` | A uint24 indicating the protocol fee |
+| Name           | Type     | Description                           |
+| -------------- | -------- | ------------------------------------- |
+| `protocolFee_` | `uint24` | A uint24 indicating the protocol fee. |
 
 ### isleVault
 
@@ -226,13 +183,13 @@ function protocolPaused() external view returns (bool protocolPaused_);
 
 **Returns**
 
-| Name              | Type   | Description                                            |
-| ----------------- | ------ | ------------------------------------------------------ |
-| `protocolPaused_` | `bool` | A boolean indicating the status of the protocol pause. |
+| Name              | Type   | Description                                          |
+| ----------------- | ------ | ---------------------------------------------------- |
+| `protocolPaused_` | `bool` | A boolean indicating whether the protocol is paused. |
 
 ### isContractPaused
 
-Returns the pause status of a specific contract
+Returns the pause status of a specific contract.
 
 ```solidity
 function isContractPaused(address contract_) external view returns (bool contractPaused_);
@@ -240,19 +197,19 @@ function isContractPaused(address contract_) external view returns (bool contrac
 
 **Parameters**
 
-| Name        | Type      | Description                          |
-| ----------- | --------- | ------------------------------------ |
-| `contract_` | `address` | The address of the contract to check |
+| Name        | Type      | Description                           |
+| ----------- | --------- | ------------------------------------- |
+| `contract_` | `address` | The address of the contract to check. |
 
 **Returns**
 
-| Name              | Type   | Description                                           |
-| ----------------- | ------ | ----------------------------------------------------- |
-| `contractPaused_` | `bool` | A boolean indicating the pause status of the contract |
+| Name              | Type   | Description                                        |
+| ----------------- | ------ | -------------------------------------------------- |
+| `contractPaused_` | `bool` | A boolean indicating whether a contract is paused. |
 
 ### isFunctionUnpaused
 
-Returns the unpause status of a specific function in a contract
+Returns the unpause status of a specific function in a contract.
 
 ```solidity
 function isFunctionUnpaused(address contract_, bytes4 sig_) external view returns (bool functionUnpaused_);
@@ -260,36 +217,56 @@ function isFunctionUnpaused(address contract_, bytes4 sig_) external view return
 
 **Parameters**
 
-| Name        | Type      | Description                 |
-| ----------- | --------- | --------------------------- |
-| `contract_` | `address` | The address of the contract |
-| `sig_`      | `bytes4`  | The function signature      |
+| Name        | Type      | Description                  |
+| ----------- | --------- | ---------------------------- |
+| `contract_` | `address` | The address of the contract. |
+| `sig_`      | `bytes4`  | The function signature.      |
 
 **Returns**
 
-| Name                | Type   | Description                                             |
-| ------------------- | ------ | ------------------------------------------------------- |
-| `functionUnpaused_` | `bool` | A boolean indicating the unpause status of the function |
+| Name                | Type   | Description                                            |
+| ------------------- | ------ | ------------------------------------------------------ |
+| `functionUnpaused_` | `bool` | A boolean indicating whether the function is unpaused. |
 
-### isCollateralAsset
+### isPoolAdmin
 
-Gets the validity of a collateral asset.
+Returns if the account is a valid poolAdmin.
 
 ```solidity
-function isCollateralAsset(address collateralAsset_) external view returns (bool isCollateralAsset_);
+function isPoolAdmin(address account_) external view returns (bool isPoolAdmin_);
+```
+
+**Parameters**
+
+| Name       | Type      | Description                          |
+| ---------- | --------- | ------------------------------------ |
+| `account_` | `address` | The address of the account to check. |
+
+**Returns**
+
+| Name           | Type   | Description                               |
+| -------------- | ------ | ----------------------------------------- |
+| `isPoolAdmin_` | `bool` | Whether the account is a valid poolAdmin. |
+
+### isReceivableAsset
+
+Gets the validity of a receivable asset.
+
+```solidity
+function isReceivableAsset(address receivableAsset_) external view returns (bool isReceivableAsset_);
 ```
 
 **Parameters**
 
 | Name               | Type      | Description                                  |
 | ------------------ | --------- | -------------------------------------------- |
-| `collateralAsset_` | `address` | The address of the collateralAsset to query. |
+| `receivableAsset_` | `address` | The address of the receivableAsset to query. |
 
 **Returns**
 
 | Name                 | Type   | Description                                                |
 | -------------------- | ------ | ---------------------------------------------------------- |
-| `isCollateralAsset_` | `bool` | A boolean indicating the validity of the collateral asset. |
+| `isReceivableAsset_` | `bool` | A boolean indicating the validity of the receivable asset. |
 
 ### isPoolAsset
 
@@ -311,37 +288,9 @@ function isPoolAsset(address poolAsset_) external view returns (bool isPoolAsset
 | -------------- | ------ | ---------------------------------------------------- |
 | `isPoolAsset_` | `bool` | A boolean indicating the validity of the pool asset. |
 
-### governor
-
-Returns the address of the governor
-
-```solidity
-function governor() external view returns (address governor_);
-```
-
-**Returns**
-
-| Name        | Type      | Description                 |
-| ----------- | --------- | --------------------------- |
-| `governor_` | `address` | The address of the governor |
-
-### getImplementation
-
-Returns the address of the implementation contract
-
-```solidity
-function getImplementation() external view returns (address implementation_);
-```
-
-**Returns**
-
-| Name              | Type      | Description                                |
-| ----------------- | --------- | ------------------------------------------ |
-| `implementation_` | `address` | The address of the implementation contract |
-
 ### isFunctionPaused
 
-Returns the pause status of a specific function in a contract
+Returns the pause status of a specific function in a contract.
 
 ```solidity
 function isFunctionPaused(address contract_, bytes4 sig_) external view returns (bool isFunctionPaused_);
@@ -349,20 +298,20 @@ function isFunctionPaused(address contract_, bytes4 sig_) external view returns 
 
 **Parameters**
 
-| Name        | Type      | Description                 |
-| ----------- | --------- | --------------------------- |
-| `contract_` | `address` | The address of the contract |
-| `sig_`      | `bytes4`  | The function signature      |
+| Name        | Type      | Description                  |
+| ----------- | --------- | ---------------------------- |
+| `contract_` | `address` | The address of the contract. |
+| `sig_`      | `bytes4`  | The function signature.      |
 
 **Returns**
 
-| Name                | Type   | Description                                           |
-| ------------------- | ------ | ----------------------------------------------------- |
-| `isFunctionPaused_` | `bool` | A boolean indicating the pause status of the function |
+| Name                | Type   | Description                                            |
+| ------------------- | ------ | ------------------------------------------------------ |
+| `isFunctionPaused_` | `bool` | A boolean indicating the pause status of the function. |
 
 ### isFunctionPaused
 
-Returns the pause status of a specific function in the caller contract
+Returns the pause status of a specific function in the caller contract.
 
 ```solidity
 function isFunctionPaused(bytes4 sig_) external view returns (bool isFunctionPaused_);
@@ -370,117 +319,12 @@ function isFunctionPaused(bytes4 sig_) external view returns (bool isFunctionPau
 
 **Parameters**
 
-| Name   | Type     | Description            |
-| ------ | -------- | ---------------------- |
-| `sig_` | `bytes4` | The function signature |
+| Name   | Type     | Description             |
+| ------ | -------- | ----------------------- |
+| `sig_` | `bytes4` | The function signature. |
 
 **Returns**
 
-| Name                | Type   | Description                                           |
-| ------------------- | ------ | ----------------------------------------------------- |
-| `isFunctionPaused_` | `bool` | A boolean indicating the pause status of the function |
-
-### poolConfigurators
-
-Returns the configuration info of a pool configurator
-
-```solidity
-function poolConfigurators(address poolConfigurator_)
-    external
-    view
-    returns (uint24 maxCoverLiquidation_, uint104 minCover_, uint104 poolLimit_);
-```
-
-**Parameters**
-
-| Name                | Type      | Description                          |
-| ------------------- | --------- | ------------------------------------ |
-| `poolConfigurator_` | `address` | The address of the pool configurator |
-
-**Returns**
-
-| Name                   | Type      | Description                                                         |
-| ---------------------- | --------- | ------------------------------------------------------------------- |
-| `maxCoverLiquidation_` | `uint24`  | The max cover liquidation as a percentage for the pool configurator |
-| `minCover_`            | `uint104` | The min cover required for the pool configurator                    |
-| `poolLimit_`           | `uint104` | The limit for the pool under the pool configurator                  |
-
-### isPoolAdmin
-
-Returns if the account is a valid poolAdmin
-
-```solidity
-function isPoolAdmin(address account_) external view returns (bool isPoolAdmin_);
-```
-
-**Parameters**
-
-| Name       | Type      | Description                         |
-| ---------- | --------- | ----------------------------------- |
-| `account_` | `address` | The address of the account to check |
-
-**Returns**
-
-| Name           | Type   | Description                              |
-| -------------- | ------ | ---------------------------------------- |
-| `isPoolAdmin_` | `bool` | Whether the account is a valid poolAdmin |
-
-### maxCoverLiquidation
-
-Returns the max cover liquidation as a percentage for the pool configurator
-
-```solidity
-function maxCoverLiquidation(address poolConfigurator_) external view returns (uint24 maxCoverLiquidation_);
-```
-
-**Parameters**
-
-| Name                | Type      | Description                          |
-| ------------------- | --------- | ------------------------------------ |
-| `poolConfigurator_` | `address` | The address of the pool configurator |
-
-**Returns**
-
-| Name                   | Type     | Description                                                         |
-| ---------------------- | -------- | ------------------------------------------------------------------- |
-| `maxCoverLiquidation_` | `uint24` | The max cover liquidation as a percentage for the pool configurator |
-
-### minCover
-
-Returns the min cover required for a pool configurator
-
-```solidity
-function minCover(address poolConfigurator_) external view returns (uint104 minCover_);
-```
-
-**Parameters**
-
-| Name                | Type      | Description                          |
-| ------------------- | --------- | ------------------------------------ |
-| `poolConfigurator_` | `address` | The address of the pool configurator |
-
-**Returns**
-
-| Name        | Type      | Description                                      |
-| ----------- | --------- | ------------------------------------------------ |
-| `minCover_` | `uint104` | The min cover required for the pool configurator |
-
-### poolLimit
-
-Returns the pool limit of the pool under the pool configurator
-
-```solidity
-function poolLimit(address poolConfigurator_) external view returns (uint104 poolLimit_);
-```
-
-**Parameters**
-
-| Name                | Type      | Description                          |
-| ------------------- | --------- | ------------------------------------ |
-| `poolConfigurator_` | `address` | The address of the pool configurator |
-
-**Returns**
-
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `poolLimit_` | `uint104` | The limit for the pool under the pool configurator |
+| Name                | Type   | Description                                            |
+| ------------------- | ------ | ------------------------------------------------------ |
+| `isFunctionPaused_` | `bool` | A boolean indicating the pause status of the function. |

@@ -1,9 +1,10 @@
 # WithdrawalManager
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/WithdrawalManager.sol)
 
-**Inherits:**
-[WithdrawalManagerStorage](/docs/reference/WithdrawalManagerStorage.md), [IWithdrawalManager](/docs/reference/interfaces/IWithdrawalManager.md), [VersionedInitializable](/docs/reference/libraries/upgradability/VersionedInitializable.md)
+**Inherits:** [WithdrawalManagerStorage](/docs/reference/WithdrawalManagerStorage.md),
+[IWithdrawalManager](/docs/reference/interfaces/IWithdrawalManager.md),
+[VersionedInitializable](/docs/reference/libraries/upgradability/VersionedInitializable.md)
 
 ## State Variables
 
@@ -46,7 +47,7 @@ Returns the revision number of the contract
 _Needs to be defined in the inherited class as a constant._
 
 ```solidity
-function getRevision() internal pure virtual override returns (uint256 revision_);
+function getRevision() public pure virtual override returns (uint256 revision_);
 ```
 
 **Returns**
@@ -58,15 +59,15 @@ function getRevision() internal pure virtual override returns (uint256 revision_
 ### constructor
 
 ```solidity
-constructor(IPoolAddressesProvider provider);
+constructor(IPoolAddressesProvider provider_);
 ```
 
 ### initialize
 
 Initializes the Withdrawal Manager.
 
-_Function is invoked by the proxy contract when the Withdrawal Manager Contract is added to the
-PoolAddressesProvider of the market_
+_Function is invoked by the proxy contract when the Withdrawal Manager Contract is added to the PoolAddressesProvider of
+the market._
 
 ```solidity
 function initialize(
@@ -81,15 +82,15 @@ function initialize(
 
 **Parameters**
 
-| Name              | Type                     | Description                              |
-| ----------------- | ------------------------ | ---------------------------------------- |
-| `provider_`       | `IPoolAddressesProvider` | The address of the PoolAddressesProvider |
-| `cycleDuration_`  | `uint256`                | The total duration of a withdrawal cycle |
-| `windowDuration_` | `uint256`                | The duration of the withdrawal window    |
+| Name              | Type                     | Description                               |
+| ----------------- | ------------------------ | ----------------------------------------- |
+| `provider_`       | `IPoolAddressesProvider` | The address of the PoolAddressesProvider. |
+| `cycleDuration_`  | `uint256`                | The total duration of a withdrawal cycle. |
+| `windowDuration_` | `uint256`                | The duration of the withdrawal window.    |
 
 ### setExitConfig
 
-Pool admin sets a new configuration for the withdrawal manager
+Pool admin sets a new configuration for the withdrawal manager.
 
 ```solidity
 function setExitConfig(uint256 cycleDuration_, uint256 windowDuration_) external override whenProtocolNotPaused;
@@ -97,14 +98,14 @@ function setExitConfig(uint256 cycleDuration_, uint256 windowDuration_) external
 
 **Parameters**
 
-| Name              | Type      | Description                               |
-| ----------------- | --------- | ----------------------------------------- |
-| `cycleDuration_`  | `uint256` | The total duration of a withdrawal cycle  |
-| `windowDuration_` | `uint256` | The total duration of a withdrawal window |
+| Name              | Type      | Description                                |
+| ----------------- | --------- | ------------------------------------------ |
+| `cycleDuration_`  | `uint256` | The total duration of a withdrawal cycle.  |
+| `windowDuration_` | `uint256` | The total duration of a withdrawal window. |
 
 ### addShares
 
-Add more shares for withdrawal
+Add more shares for withdrawal.
 
 ```solidity
 function addShares(uint256 shares_, address owner_) external override onlyPoolConfigurator;
@@ -112,14 +113,14 @@ function addShares(uint256 shares_, address owner_) external override onlyPoolCo
 
 **Parameters**
 
-| Name      | Type      | Description                 |
-| --------- | --------- | --------------------------- |
-| `shares_` | `uint256` | The amount of shares to add |
-| `owner_`  | `address` | The owner of the shares     |
+| Name      | Type      | Description                  |
+| --------- | --------- | ---------------------------- |
+| `shares_` | `uint256` | The amount of shares to add. |
+| `owner_`  | `address` | The owner of the shares.     |
 
 ### removeShares
 
-Remove shares from withdrawal
+Remove shares from withdrawal.
 
 ```solidity
 function removeShares(
@@ -134,14 +135,14 @@ function removeShares(
 
 **Parameters**
 
-| Name      | Type      | Description                                    |
-| --------- | --------- | ---------------------------------------------- |
-| `shares_` | `uint256` | The amount of shares to remove from withdrawal |
-| `owner_`  | `address` | The owner of the shares                        |
+| Name      | Type      | Description                                     |
+| --------- | --------- | ----------------------------------------------- |
+| `shares_` | `uint256` | The amount of shares to remove from withdrawal. |
+| `owner_`  | `address` | The owner of the shares.                        |
 
 ### processExit
 
-Process the exit of requested shares of a owner
+Process the exit of requested shares of a owner.
 
 ```solidity
 function processExit(
@@ -154,9 +155,23 @@ function processExit(
     returns (uint256 redeemableShares_, uint256 resultingAssets_);
 ```
 
+**Parameters**
+
+| Name               | Type      | Description                     |
+| ------------------ | --------- | ------------------------------- |
+| `requestedShares_` | `uint256` | The amount of shares to redeem. |
+| `owner_`           | `address` | The owner of the shares.        |
+
+**Returns**
+
+| Name                | Type      | Description                                                    |
+| ------------------- | --------- | -------------------------------------------------------------- |
+| `redeemableShares_` | `uint256` | The amount of redeemable shares.                               |
+| `resultingAssets_`  | `uint256` | The corresponding amount of assets with the redeemable shares. |
+
 ### isInExitWindow
 
-Checks if the owner has a withdrawal request in the exit window
+Checks if the owner has a withdrawal request in the exit window.
 
 ```solidity
 function isInExitWindow(address owner_) external view override returns (bool isInExitWindow_);
@@ -164,19 +179,19 @@ function isInExitWindow(address owner_) external view override returns (bool isI
 
 **Parameters**
 
-| Name     | Type      | Description                |
-| -------- | --------- | -------------------------- |
-| `owner_` | `address` | The owner address to check |
+| Name     | Type      | Description                 |
+| -------- | --------- | --------------------------- |
+| `owner_` | `address` | The owner address to check. |
 
 **Returns**
 
-| Name              | Type   | Description                                                   |
-| ----------------- | ------ | ------------------------------------------------------------- |
-| `isInExitWindow_` | `bool` | True if the owner has a withdrawal request in the exit window |
+| Name              | Type   | Description                                                    |
+| ----------------- | ------ | -------------------------------------------------------------- |
+| `isInExitWindow_` | `bool` | True if the owner has a withdrawal request in the exit window. |
 
 ### lockedLiquidity
 
-Gets the total amount of liquidity locked in the current cycle
+Gets the total amount of liquidity locked in the current cycle.
 
 ```solidity
 function lockedLiquidity() external view override returns (uint256 lockedLiquidity_);
@@ -184,13 +199,13 @@ function lockedLiquidity() external view override returns (uint256 lockedLiquidi
 
 **Returns**
 
-| Name               | Type      | Description                                               |
-| ------------------ | --------- | --------------------------------------------------------- |
-| `lockedLiquidity_` | `uint256` | The total amount of liquidity locked in the current cycle |
+| Name               | Type      | Description                                                |
+| ------------------ | --------- | ---------------------------------------------------------- |
+| `lockedLiquidity_` | `uint256` | The total amount of liquidity locked in the current cycle. |
 
 ### previewRedeem
 
-Previews the amount of shares and assets that can be redeemed
+Previews the amount of shares and assets that can be redeemed.
 
 ```solidity
 function previewRedeem(
@@ -205,21 +220,21 @@ function previewRedeem(
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
-| `owner_`  | `address` | The owner of the shares        |
-| `shares_` | `uint256` | The amount of shares to redeem |
+| Name      | Type      | Description                     |
+| --------- | --------- | ------------------------------- |
+| `owner_`  | `address` | The owner of the shares.        |
+| `shares_` | `uint256` | The amount of shares to redeem. |
 
 **Returns**
 
-| Name                | Type      | Description                                                   |
-| ------------------- | --------- | ------------------------------------------------------------- |
-| `redeemableShares_` | `uint256` | The amount of redeemable shares                               |
-| `resultingAssets_`  | `uint256` | The corresponding amount of assets with the redeemable shares |
+| Name                | Type      | Description                                                    |
+| ------------------- | --------- | -------------------------------------------------------------- |
+| `redeemableShares_` | `uint256` | The amount of redeemable shares.                               |
+| `resultingAssets_`  | `uint256` | The corresponding amount of assets with the redeemable shares. |
 
 ### getCycleConfig
 
-Gets the configuration of a config id
+Gets the configuration of a config id.
 
 ```solidity
 function getCycleConfig(uint256 configId_) public view override returns (WM.CycleConfig memory config_);
@@ -227,19 +242,19 @@ function getCycleConfig(uint256 configId_) public view override returns (WM.Cycl
 
 **Parameters**
 
-| Name        | Type      | Description          |
-| ----------- | --------- | -------------------- |
-| `configId_` | `uint256` | The id of the config |
+| Name        | Type      | Description           |
+| ----------- | --------- | --------------------- |
+| `configId_` | `uint256` | The id of the config. |
 
 **Returns**
 
 | Name      | Type             | Description |
 | --------- | ---------------- | ----------- |
-| `config_` | `WM.CycleConfig` | The config  |
+| `config_` | `WM.CycleConfig` | The config. |
 
 ### getConfigAtId
 
-Gets the configuration of a given cycle id
+Gets the configuration of a given cycle id.
 
 ```solidity
 function getConfigAtId(uint256 cycleId_) public view override returns (WM.CycleConfig memory config_);
@@ -247,19 +262,19 @@ function getConfigAtId(uint256 cycleId_) public view override returns (WM.CycleC
 
 **Parameters**
 
-| Name       | Type      | Description  |
-| ---------- | --------- | ------------ |
-| `cycleId_` | `uint256` | The cycle id |
+| Name       | Type      | Description   |
+| ---------- | --------- | ------------- |
+| `cycleId_` | `uint256` | The cycle id. |
 
 **Returns**
 
-| Name      | Type             | Description                            |
-| --------- | ---------------- | -------------------------------------- |
-| `config_` | `WM.CycleConfig` | The configuration used at the cycle id |
+| Name      | Type             | Description                             |
+| --------- | ---------------- | --------------------------------------- |
+| `config_` | `WM.CycleConfig` | The configuration used at the cycle id. |
 
 ### getCurrentConfig
 
-Gets the configuration of the current cycle id
+Gets the configuration of the current cycle id.
 
 ```solidity
 function getCurrentConfig() public view override returns (WM.CycleConfig memory config_);
@@ -267,13 +282,13 @@ function getCurrentConfig() public view override returns (WM.CycleConfig memory 
 
 **Returns**
 
-| Name      | Type             | Description                                    |
-| --------- | ---------------- | ---------------------------------------------- |
-| `config_` | `WM.CycleConfig` | The configuration used at the current cycle id |
+| Name      | Type             | Description                                     |
+| --------- | ---------------- | ----------------------------------------------- |
+| `config_` | `WM.CycleConfig` | The configuration used at the current cycle id. |
 
 ### getCurrentCycleId
 
-Gets the current cycle id
+Gets the current cycle id.
 
 ```solidity
 function getCurrentCycleId() public view override returns (uint256 cycleId_);
@@ -281,13 +296,13 @@ function getCurrentCycleId() public view override returns (uint256 cycleId_);
 
 **Returns**
 
-| Name       | Type      | Description                 |
-| ---------- | --------- | --------------------------- |
-| `cycleId_` | `uint256` | The id of the current cycle |
+| Name       | Type      | Description                  |
+| ---------- | --------- | ---------------------------- |
+| `cycleId_` | `uint256` | The id of the current cycle. |
 
 ### getWindowStart
 
-Gets the starting time of a window for a given cycle id
+Gets the starting time of a window for a given cycle id.
 
 ```solidity
 function getWindowStart(uint256 cycleId_) public view override returns (uint64 windowStart_);
@@ -295,19 +310,19 @@ function getWindowStart(uint256 cycleId_) public view override returns (uint64 w
 
 **Parameters**
 
-| Name       | Type      | Description         |
-| ---------- | --------- | ------------------- |
-| `cycleId_` | `uint256` | The id of the cycle |
+| Name       | Type      | Description          |
+| ---------- | --------- | -------------------- |
+| `cycleId_` | `uint256` | The id of the cycle. |
 
 **Returns**
 
-| Name           | Type     | Description                     |
-| -------------- | -------- | ------------------------------- |
-| `windowStart_` | `uint64` | The starting time of the window |
+| Name           | Type     | Description                      |
+| -------------- | -------- | -------------------------------- |
+| `windowStart_` | `uint64` | The starting time of the window. |
 
 ### getWindowAtId
 
-Gets the start and end time of a window for a given cycle id
+Gets the start and end time of a window for a given cycle id.
 
 ```solidity
 function getWindowAtId(uint256 cycleId_) public view override returns (uint64 windowStart_, uint64 windowEnd_);
@@ -315,16 +330,16 @@ function getWindowAtId(uint256 cycleId_) public view override returns (uint64 wi
 
 **Parameters**
 
-| Name       | Type      | Description         |
-| ---------- | --------- | ------------------- |
-| `cycleId_` | `uint256` | The id of the cycle |
+| Name       | Type      | Description          |
+| ---------- | --------- | -------------------- |
+| `cycleId_` | `uint256` | The id of the cycle. |
 
 **Returns**
 
-| Name           | Type     | Description                     |
-| -------------- | -------- | ------------------------------- |
-| `windowStart_` | `uint64` | The starting time of the window |
-| `windowEnd_`   | `uint64` | The ending time of the window   |
+| Name           | Type     | Description                      |
+| -------------- | -------- | -------------------------------- |
+| `windowStart_` | `uint64` | The starting time of the window. |
+| `windowEnd_`   | `uint64` | The ending time of the window.   |
 
 ### getRedeemableAmounts
 

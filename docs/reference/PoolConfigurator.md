@@ -1,9 +1,11 @@
 # PoolConfigurator
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/PoolConfigurator.sol)
 
 **Inherits:**
-[Adminable](/docs/reference/abstracts/Adminable.md), [VersionedInitializable](/docs/reference/libraries/upgradability/VersionedInitializable.md), [IPoolConfigurator](/docs/reference/interfaces/IPoolConfigurator.md), [PoolConfiguratorStorage](/docs/reference/PoolConfiguratorStorage.md)
+[VersionedInitializable](/docs/reference/libraries/upgradability/VersionedInitializable.md),
+[IPoolConfigurator](/docs/reference/interfaces/IPoolConfigurator.md),
+[PoolConfiguratorStorage](/docs/reference/PoolConfiguratorStorage.md)
 
 See the documentation in {IPoolConfigurator}.
 
@@ -47,6 +49,12 @@ modifier onlyAdminOrGovernor();
 modifier onlyGovernor();
 ```
 
+### onlyAdmin
+
+```solidity
+modifier onlyAdmin();
+```
+
 ### onlyPool
 
 ```solidity
@@ -66,7 +74,7 @@ Returns the revision number of the contract
 _Needs to be defined in the inherited class as a constant._
 
 ```solidity
-function getRevision() internal pure virtual override returns (uint256 revision_);
+function getRevision() public pure virtual override returns (uint256 revision_);
 ```
 
 **Returns**
@@ -77,15 +85,15 @@ function getRevision() internal pure virtual override returns (uint256 revision_
 
 ### initialize
 
-The initializer function for the pool configurator (must be called straight after deployment)
+The initializer function for the pool configurator (must be called directly after deployment).
 
 ```solidity
 function initialize(
     IPoolAddressesProvider provider_,
     address poolAdmin_,
     address asset_,
-    string memory name_,
-    string memory symbol_
+    string calldata name_,
+    string calldata symbol_
 )
     external
     override
@@ -94,23 +102,31 @@ function initialize(
 
 **Parameters**
 
-| Name         | Type                     | Description                                       |
-| ------------ | ------------------------ | ------------------------------------------------- |
-| `provider_`  | `IPoolAddressesProvider` | The address of the pool addresses provider.       |
-| `poolAdmin_` | `address`                | The address of the pool admin                     |
-| `asset_`     | `address`                | The funds asset used in the pool (e.g. DAI, USDC) |
-| `name_`      | `string`                 | The name of the asset                             |
-| `symbol_`    | `string`                 | The symbol of the asset                           |
+| Name         | Type                     | Description                                 |
+| ------------ | ------------------------ | ------------------------------------------- |
+| `provider_`  | `IPoolAddressesProvider` | The address of the pool addresses provider. |
+| `poolAdmin_` | `address`                | The address of the pool admin.              |
+| `asset_`     | `address`                | The ERC20 asset used in the lending pool.   |
+| `name_`      | `string`                 | The name of the pool token.                 |
+| `symbol_`    | `string`                 | The symbol of the pool token.               |
 
 ### transferAdmin
 
+Transfers to a new admin.
+
 ```solidity
-function transferAdmin(address newAdmin_) external override(Adminable, IAdminable) onlyGovernor;
+function transferAdmin(address newAdmin_) external virtual override onlyGovernor;
 ```
+
+**Parameters**
+
+| Name        | Type      | Description                   |
+| ----------- | --------- | ----------------------------- |
+| `newAdmin_` | `address` | The address of the new admin. |
 
 ### setBuyer
 
-assigns a pool buyer to the pool
+Assigns a buyer to the pool.
 
 ```solidity
 function setBuyer(address buyer_) external override whenNotPaused onlyAdmin;
@@ -118,13 +134,13 @@ function setBuyer(address buyer_) external override whenNotPaused onlyAdmin;
 
 **Parameters**
 
-| Name     | Type      | Description                            |
-| -------- | --------- | -------------------------------------- |
-| `buyer_` | `address` | The address of the buyer for this pool |
+| Name     | Type      | Description                             |
+| -------- | --------- | --------------------------------------- |
+| `buyer_` | `address` | The address of the buyer for this pool. |
 
 ### setValidSeller
 
-Sets the status of a seller
+Sets the status of a seller.
 
 ```solidity
 function setValidSeller(address seller_, bool isValid_) external override whenNotPaused onlyAdmin;
@@ -132,14 +148,14 @@ function setValidSeller(address seller_, bool isValid_) external override whenNo
 
 **Parameters**
 
-| Name       | Type      | Description                 |
-| ---------- | --------- | --------------------------- |
-| `seller_`  | `address` | The address of the seller   |
-| `isValid_` | `bool`    | Whether the seller is valid |
+| Name       | Type      | Description                  |
+| ---------- | --------- | ---------------------------- |
+| `seller_`  | `address` | The address of the seller.   |
+| `isValid_` | `bool`    | Whether the seller is valid. |
 
 ### setValidLender
 
-Sets the status of a lender (LPs)
+Sets the status of a lender (liquidity providers).
 
 ```solidity
 function setValidLender(address lender_, bool isValid_) external override whenNotPaused onlyAdmin;
@@ -147,14 +163,14 @@ function setValidLender(address lender_, bool isValid_) external override whenNo
 
 **Parameters**
 
-| Name       | Type      | Description                 |
-| ---------- | --------- | --------------------------- |
-| `lender_`  | `address` | The address of the lender   |
-| `isValid_` | `bool`    | Whether the lender is valid |
+| Name       | Type      | Description                  |
+| ---------- | --------- | ---------------------------- |
+| `lender_`  | `address` | The address of the lender.   |
+| `isValid_` | `bool`    | Whether the lender is valid. |
 
 ### setAdminFee
 
-Sets the admin fee rate that would be applied to the pool
+Sets the admin fee rate that would be applied to the pool.
 
 ```solidity
 function setAdminFee(uint24 adminFee_) external override whenNotPaused onlyAdmin;
@@ -162,13 +178,13 @@ function setAdminFee(uint24 adminFee_) external override whenNotPaused onlyAdmin
 
 **Parameters**
 
-| Name        | Type     | Description       |
-| ----------- | -------- | ----------------- |
-| `adminFee_` | `uint24` | The new admin fee |
+| Name        | Type     | Description        |
+| ----------- | -------- | ------------------ |
+| `adminFee_` | `uint24` | The new admin fee. |
 
 ### setOpenToPublic
 
-Sets whether the pool is open to the public (permissioned or permissionless)
+Sets whether the pool is open to the public (permissioned or permissionless).
 
 ```solidity
 function setOpenToPublic(bool isOpenToPublic_) external override whenNotPaused onlyAdmin;
@@ -176,27 +192,55 @@ function setOpenToPublic(bool isOpenToPublic_) external override whenNotPaused o
 
 **Parameters**
 
-| Name              | Type   | Description                            |
-| ----------------- | ------ | -------------------------------------- |
-| `isOpenToPublic_` | `bool` | Whether the pool is open to the public |
+| Name              | Type   | Description                             |
+| ----------------- | ------ | --------------------------------------- |
+| `isOpenToPublic_` | `bool` | Whether the pool is open to the public. |
 
-### setGracePeriod
+### setMaxCoverLiquidation
 
-Sets the grace period for the pool
+Sets the max cover liquidation for the pool configurator.
 
 ```solidity
-function setGracePeriod(uint32 gracePeriod_) external override whenNotPaused onlyAdmin;
+function setMaxCoverLiquidation(uint24 maxCoverLiquidation_) external override whenNotPaused onlyGovernor;
 ```
 
 **Parameters**
 
-| Name           | Type     | Description          |
-| -------------- | -------- | -------------------- |
-| `gracePeriod_` | `uint32` | The new grace period |
+| Name                   | Type     | Description                                                   |
+| ---------------------- | -------- | ------------------------------------------------------------- |
+| `maxCoverLiquidation_` | `uint24` | The max cover liquidation as a percentage for the pool admin. |
+
+### setMinCover
+
+Sets the min cover required for the pool configurator.
+
+```solidity
+function setMinCover(uint104 minCover_) external override whenNotPaused onlyGovernor;
+```
+
+**Parameters**
+
+| Name        | Type      | Description                                |
+| ----------- | --------- | ------------------------------------------ |
+| `minCover_` | `uint104` | The min cover required for the pool admin. |
+
+### setPoolLimit
+
+Sets the pool limit for the pool configurator.
+
+```solidity
+function setPoolLimit(uint104 poolLimit_) external override whenNotPaused onlyGovernor;
+```
+
+**Parameters**
+
+| Name         | Type      | Description                 |
+| ------------ | --------- | --------------------------- |
+| `poolLimit_` | `uint104` | The size limit of the pool. |
 
 ### requestFunds
 
-Request funds from the pool and fund the loan manager
+Request funds from the pool and fund the loan manager.
 
 ```solidity
 function requestFunds(uint256 principal_) external override whenNotPaused;
@@ -204,13 +248,13 @@ function requestFunds(uint256 principal_) external override whenNotPaused;
 
 **Parameters**
 
-| Name         | Type      | Description                        |
-| ------------ | --------- | ---------------------------------- |
-| `principal_` | `uint256` | The amount of principal to request |
+| Name         | Type      | Description                         |
+| ------------ | --------- | ----------------------------------- |
+| `principal_` | `uint256` | The amount of principal to request. |
 
 ### triggerDefault
 
-Triggers the defaults of a specific loan in the loan manager
+Triggers the defaults of a specific loan in the loan manager.
 
 ```solidity
 function triggerDefault(uint16 loanId_) external override whenNotPaused onlyAdminOrGovernor;
@@ -218,29 +262,28 @@ function triggerDefault(uint16 loanId_) external override whenNotPaused onlyAdmi
 
 **Parameters**
 
-| Name      | Type     | Description                  |
-| --------- | -------- | ---------------------------- |
-| `loanId_` | `uint16` | The ID of the defaulted loan |
+| Name      | Type     | Description                   |
+| --------- | -------- | ----------------------------- |
+| `loanId_` | `uint16` | The ID of the defaulted loan. |
 
 ### requestRedeem
 
-Requests to redeem shares
+Requests to redeem shares.
 
 ```solidity
-function requestRedeem(uint256 shares_, address owner_, address sender_) external override whenNotPaused onlyPool;
+function requestRedeem(uint256 shares_, address owner_) external override whenNotPaused onlyPool;
 ```
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
-| `shares_` | `uint256` | The amount of shares to redeem |
-| `owner_`  | `address` | The owner of the shares        |
-| `sender_` | `address` | The sender of the request      |
+| Name      | Type      | Description                     |
+| --------- | --------- | ------------------------------- |
+| `shares_` | `uint256` | The amount of shares to redeem. |
+| `owner_`  | `address` | The owner of the shares.        |
 
 ### processRedeem
 
-Processes the redemption of shares for a specific owner
+Processes the redemption of shares for a specific owner.
 
 ```solidity
 function processRedeem(
@@ -257,22 +300,22 @@ function processRedeem(
 
 **Parameters**
 
-| Name      | Type      | Description                       |
-| --------- | --------- | --------------------------------- |
-| `shares_` | `uint256` | The amount of shares to redeem    |
-| `owner_`  | `address` | The owner of the shares           |
-| `sender_` | `address` | The sender of the process request |
+| Name      | Type      | Description                        |
+| --------- | --------- | ---------------------------------- |
+| `shares_` | `uint256` | The amount of shares to redeem.    |
+| `owner_`  | `address` | The owner of the shares.           |
+| `sender_` | `address` | The sender of the process request. |
 
 **Returns**
 
-| Name                | Type      | Description                                                   |
-| ------------------- | --------- | ------------------------------------------------------------- |
-| `redeemableShares_` | `uint256` | The amount of redeemable shares                               |
-| `resultingAssets_`  | `uint256` | The corresponding amount of assets with the redeemable shares |
+| Name                | Type      | Description                                                    |
+| ------------------- | --------- | -------------------------------------------------------------- |
+| `redeemableShares_` | `uint256` | The amount of redeemable shares.                               |
+| `resultingAssets_`  | `uint256` | The corresponding amount of assets with the redeemable shares. |
 
 ### removeShares
 
-Removes shares from its withdrawal request
+Removes shares from its withdrawal request.
 
 ```solidity
 function removeShares(
@@ -288,20 +331,20 @@ function removeShares(
 
 **Parameters**
 
-| Name      | Type      | Description                                    |
-| --------- | --------- | ---------------------------------------------- |
-| `shares_` | `uint256` | The amount of shares to remove from withdrawal |
-| `owner_`  | `address` | The owner of the shares                        |
+| Name      | Type      | Description                                     |
+| --------- | --------- | ----------------------------------------------- |
+| `shares_` | `uint256` | The amount of shares to remove from withdrawal. |
+| `owner_`  | `address` | The owner of the shares.                        |
 
 **Returns**
 
-| Name              | Type      | Description                   |
-| ----------------- | --------- | ----------------------------- |
-| `sharesReturned_` | `uint256` | The amount of shares returned |
+| Name              | Type      | Description                    |
+| ----------------- | --------- | ------------------------------ |
+| `sharesReturned_` | `uint256` | The amount of shares returned. |
 
 ### depositCover
 
-Pool admin deposits pool cover
+Pool admin deposits pool cover.
 
 ```solidity
 function depositCover(uint256 amount_) external override whenNotPaused;
@@ -309,13 +352,13 @@ function depositCover(uint256 amount_) external override whenNotPaused;
 
 **Parameters**
 
-| Name      | Type      | Description                                         |
-| --------- | --------- | --------------------------------------------------- |
-| `amount_` | `uint256` | The amount of assets to deposit as first-loss cover |
+| Name      | Type      | Description                                          |
+| --------- | --------- | ---------------------------------------------------- |
+| `amount_` | `uint256` | The amount of assets to deposit as first-loss cover. |
 
 ### withdrawCover
 
-Pool admin withdraws from pool cover
+Pool admin withdraws from pool cover.
 
 ```solidity
 function withdrawCover(uint256 amount_, address recipient_) external override whenNotPaused onlyAdmin;
@@ -323,14 +366,14 @@ function withdrawCover(uint256 amount_, address recipient_) external override wh
 
 **Parameters**
 
-| Name         | Type      | Description                                            |
-| ------------ | --------- | ------------------------------------------------------ |
-| `amount_`    | `uint256` | The amount of assets to withdraw from first-loss cover |
-| `recipient_` | `address` | The address of the recipient                           |
+| Name         | Type      | Description                                             |
+| ------------ | --------- | ------------------------------------------------------- |
+| `amount_`    | `uint256` | The amount of assets to withdraw from first-loss cover. |
+| `recipient_` | `address` | The address of the recipient.                           |
 
 ### openToPublic
 
-Returns whether the pool is open to public
+Returns whether the pool is open to public.
 
 ```solidity
 function openToPublic() external view override returns (bool openToPublic_);
@@ -338,13 +381,13 @@ function openToPublic() external view override returns (bool openToPublic_);
 
 **Returns**
 
-| Name            | Type   | Description                        |
-| --------------- | ------ | ---------------------------------- |
-| `openToPublic_` | `bool` | Whether the pool is open to public |
+| Name            | Type   | Description                         |
+| --------------- | ------ | ----------------------------------- |
+| `openToPublic_` | `bool` | Whether the pool is open to public. |
 
 ### adminFee
 
-Returns the admin fee of the pool
+Returns the admin fee of the pool.
 
 ```solidity
 function adminFee() external view override returns (uint24 adminFee_);
@@ -352,27 +395,55 @@ function adminFee() external view override returns (uint24 adminFee_);
 
 **Returns**
 
-| Name        | Type     | Description               |
-| ----------- | -------- | ------------------------- |
-| `adminFee_` | `uint24` | The admin fee of the pool |
+| Name        | Type     | Description                |
+| ----------- | -------- | -------------------------- |
+| `adminFee_` | `uint24` | The admin fee of the pool. |
 
-### gracePeriod
+### maxCoverLiquidation
 
-Returns the grace period of the pool
+Returns the max cover liquidation of the pool.
 
 ```solidity
-function gracePeriod() external view override returns (uint32 gracePeriod_);
+function maxCoverLiquidation() external view returns (uint24 maxCoverLiquidation_);
 ```
 
 **Returns**
 
-| Name           | Type     | Description                  |
-| -------------- | -------- | ---------------------------- |
-| `gracePeriod_` | `uint32` | The grace period of the pool |
+| Name                   | Type     | Description                            |
+| ---------------------- | -------- | -------------------------------------- |
+| `maxCoverLiquidation_` | `uint24` | The max cover liquidation of the pool. |
+
+### minCover
+
+Returns the min cover required for the pool configurator.
+
+```solidity
+function minCover() external view returns (uint104 minCover_);
+```
+
+**Returns**
+
+| Name        | Type      | Description                                |
+| ----------- | --------- | ------------------------------------------ |
+| `minCover_` | `uint104` | The min cover required for the pool admin. |
+
+### poolLimit
+
+Returns the pool limit of the pool configurator.
+
+```solidity
+function poolLimit() external view returns (uint104 poolLimit_);
+```
+
+**Returns**
+
+| Name         | Type      | Description                 |
+| ------------ | --------- | --------------------------- |
+| `poolLimit_` | `uint104` | The size limit of the pool. |
 
 ### maxDeposit
 
-Returns the max deposit amount of a receiver
+Returns the max deposit amount of a receiver.
 
 ```solidity
 function maxDeposit(address receiver_) external view virtual override returns (uint256 maxAssets_);
@@ -380,19 +451,19 @@ function maxDeposit(address receiver_) external view virtual override returns (u
 
 **Parameters**
 
-| Name        | Type      | Description                 |
-| ----------- | --------- | --------------------------- |
-| `receiver_` | `address` | The address of the receiver |
+| Name        | Type      | Description                  |
+| ----------- | --------- | ---------------------------- |
+| `receiver_` | `address` | The address of the receiver. |
 
 **Returns**
 
-| Name         | Type      | Description                                    |
-| ------------ | --------- | ---------------------------------------------- |
-| `maxAssets_` | `uint256` | The max amount of assets that can be deposited |
+| Name         | Type      | Description                                     |
+| ------------ | --------- | ----------------------------------------------- |
+| `maxAssets_` | `uint256` | The max amount of assets that can be deposited. |
 
 ### maxMint
 
-Returns the max mint amount of a receiver
+Returns the max mint amount of a receiver.
 
 ```solidity
 function maxMint(address receiver_) external view virtual override returns (uint256 maxShares_);
@@ -400,19 +471,19 @@ function maxMint(address receiver_) external view virtual override returns (uint
 
 **Parameters**
 
-| Name        | Type      | Description                 |
-| ----------- | --------- | --------------------------- |
-| `receiver_` | `address` | The address of the receiver |
+| Name        | Type      | Description                  |
+| ----------- | --------- | ---------------------------- |
+| `receiver_` | `address` | The address of the receiver. |
 
 **Returns**
 
-| Name         | Type      | Description                                 |
-| ------------ | --------- | ------------------------------------------- |
-| `maxShares_` | `uint256` | The max amount of shares that can be minted |
+| Name         | Type      | Description                                  |
+| ------------ | --------- | -------------------------------------------- |
+| `maxShares_` | `uint256` | The max amount of shares that can be minted. |
 
 ### maxRedeem
 
-Returns the max redeem amount of an owner
+Returns the max redeem amount of an owner.
 
 ```solidity
 function maxRedeem(address owner_) external view virtual override returns (uint256 maxShares_);
@@ -420,19 +491,19 @@ function maxRedeem(address owner_) external view virtual override returns (uint2
 
 **Parameters**
 
-| Name     | Type      | Description              |
-| -------- | --------- | ------------------------ |
-| `owner_` | `address` | The address of the owner |
+| Name     | Type      | Description               |
+| -------- | --------- | ------------------------- |
+| `owner_` | `address` | The address of the owner. |
 
 **Returns**
 
-| Name         | Type      | Description                                   |
-| ------------ | --------- | --------------------------------------------- |
-| `maxShares_` | `uint256` | The max amount of shares that can be redeemed |
+| Name         | Type      | Description                                    |
+| ------------ | --------- | ---------------------------------------------- |
+| `maxShares_` | `uint256` | The max amount of shares that can be redeemed. |
 
 ### previewRedeem
 
-Previews the amount of assets that can be redeemed for the amount of shares specified
+Previews the amount of assets that can be redeemed for the amount of shares specified.
 
 ```solidity
 function previewRedeem(address owner_, uint256 shares_) external view virtual override returns (uint256 assets_);
@@ -440,20 +511,20 @@ function previewRedeem(address owner_, uint256 shares_) external view virtual ov
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
-| `owner_`  | `address` | The address of the owner       |
-| `shares_` | `uint256` | The amount of shares to redeem |
+| Name      | Type      | Description                     |
+| --------- | --------- | ------------------------------- |
+| `owner_`  | `address` | The address of the owner.       |
+| `shares_` | `uint256` | The amount of shares to redeem. |
 
 **Returns**
 
-| Name      | Type      | Description                                 |
-| --------- | --------- | ------------------------------------------- |
-| `assets_` | `uint256` | The amount of assets that would be received |
+| Name      | Type      | Description                                  |
+| --------- | --------- | -------------------------------------------- |
+| `assets_` | `uint256` | The amount of assets that would be received. |
 
 ### totalAssets
 
-Returns the total amount of assets in the pool
+Returns the total amount of assets in the pool.
 
 ```solidity
 function totalAssets() external view override returns (uint256 totalAssets_);
@@ -461,13 +532,13 @@ function totalAssets() external view override returns (uint256 totalAssets_);
 
 **Returns**
 
-| Name           | Type      | Description                            |
-| -------------- | --------- | -------------------------------------- |
-| `totalAssets_` | `uint256` | The total amount of assets in the pool |
+| Name           | Type      | Description                             |
+| -------------- | --------- | --------------------------------------- |
+| `totalAssets_` | `uint256` | The total amount of assets in the pool. |
 
 ### hasSufficientCover
 
-Returns whether the pool currently has sufficient cover
+Returns whether the pool currently has sufficient cover.
 
 ```solidity
 function hasSufficientCover() external view override returns (bool hasSufficientCover_);
@@ -475,13 +546,13 @@ function hasSufficientCover() external view override returns (bool hasSufficient
 
 **Returns**
 
-| Name                  | Type   | Description                                     |
-| --------------------- | ------ | ----------------------------------------------- |
-| `hasSufficientCover_` | `bool` | Whether the pool currently has sufficient cover |
+| Name                  | Type   | Description                                      |
+| --------------------- | ------ | ------------------------------------------------ |
+| `hasSufficientCover_` | `bool` | Whether the pool currently has sufficient cover. |
 
 ### unrealizedLosses
 
-Returns the current amount of unrealized losses of the pool
+Returns the current amount of unrealized losses of the pool.
 
 ```solidity
 function unrealizedLosses() external view override returns (uint256 unrealizedLosses_);
@@ -489,9 +560,9 @@ function unrealizedLosses() external view override returns (uint256 unrealizedLo
 
 **Returns**
 
-| Name                | Type      | Description                                         |
-| ------------------- | --------- | --------------------------------------------------- |
-| `unrealizedLosses_` | `uint256` | The current amount of unrealized losses of the pool |
+| Name                | Type      | Description                                          |
+| ------------------- | --------- | ---------------------------------------------------- |
+| `unrealizedLosses_` | `uint256` | The current amount of unrealized losses of the pool. |
 
 ### \_totalAssets
 
@@ -503,6 +574,12 @@ function _totalAssets() internal view returns (uint256 totalAssets_);
 
 ```solidity
 function _revertIfPaused() internal view;
+```
+
+### \_revertIfNotAdmin
+
+```solidity
+function _revertIfNotAdmin() internal view;
 ```
 
 ### \_revertIfNotAdminOrGovernor
@@ -526,7 +603,7 @@ function _revertIfNotPool() internal view;
 ### \_hasSufficientCover
 
 ```solidity
-function _hasSufficientCover(IIsleGlobals globals_) internal view returns (bool hasSufficientCover_);
+function _hasSufficientCover() internal view returns (bool hasSufficientCover_);
 ```
 
 ### \_handleCover

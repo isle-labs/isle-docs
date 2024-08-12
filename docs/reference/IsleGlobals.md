@@ -1,22 +1,17 @@
 # IsleGlobals
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/IsleGlobals.sol)
 
-**Inherits:**
-[IIsleGlobals](/docs/reference/interfaces/IIsleGlobals.md), [VersionedInitializable](/docs/reference/libraries/upgradability/VersionedInitializable.md), [Adminable](/docs/reference/abstracts/Adminable.md), UUPSUpgradeable
+**Inherits:** [IIsleGlobals](/docs/reference/interfaces/IIsleGlobals.md),
+[VersionedInitializable](/docs/reference/libraries/upgradability/VersionedInitializable.md),
+[Governable](/docs/reference/abstracts/Governable.md), UUPSUpgradeable
 
 ## State Variables
 
 ### ISLE_GLOBALS_REVISION
 
 ```solidity
-uint256 public constant ISLE_GLOBALS_REVISION = 0x1;
-```
-
-### HUNDRED\_
-
-```solidity
-uint256 public constant HUNDRED_ = 1_000_000;
+uint256 private constant ISLE_GLOBALS_REVISION = 0x1;
 ```
 
 ### protocolFee
@@ -49,22 +44,16 @@ mapping(address => bool) public override isContractPaused;
 mapping(address => mapping(bytes4 => bool)) public override isFunctionUnpaused;
 ```
 
-### poolConfigurators
-
-```solidity
-mapping(address => Globals.PoolConfigurator) public override poolConfigurators;
-```
-
 ### isPoolAdmin
 
 ```solidity
 mapping(address => bool) public override isPoolAdmin;
 ```
 
-### isCollateralAsset
+### isReceivableAsset
 
 ```solidity
-mapping(address => bool) public override isCollateralAsset;
+mapping(address => bool) public override isReceivableAsset;
 ```
 
 ### isPoolAsset
@@ -75,18 +64,6 @@ mapping(address => bool) public override isPoolAsset;
 
 ## Functions
 
-### \_authorizeUpgrade
-
-```solidity
-function _authorizeUpgrade(address newImplementation_) internal override onlyAdmin;
-```
-
-### getImplementation
-
-```solidity
-function getImplementation() external view override returns (address implementation_);
-```
-
 ### getRevision
 
 Returns the revision number of the contract
@@ -94,7 +71,7 @@ Returns the revision number of the contract
 _Needs to be defined in the inherited class as a constant._
 
 ```solidity
-function getRevision() internal pure virtual override returns (uint256 revision_);
+function getRevision() public pure virtual override returns (uint256 revision_);
 ```
 
 **Returns**
@@ -103,9 +80,15 @@ function getRevision() internal pure virtual override returns (uint256 revision_
 | ----------- | --------- | ------------------- |
 | `revision_` | `uint256` | The revision number |
 
+### \_authorizeUpgrade
+
+```solidity
+function _authorizeUpgrade(address newImplementation_) internal override onlyGovernor;
+```
+
 ### initialize
 
-Initializes the contract
+Initializes the contract.
 
 ```solidity
 function initialize(address governor_) external override initializer;
@@ -113,30 +96,30 @@ function initialize(address governor_) external override initializer;
 
 **Parameters**
 
-| Name        | Type      | Description                 |
-| ----------- | --------- | --------------------------- |
-| `governor_` | `address` | The address of the governor |
+| Name        | Type      | Description                  |
+| ----------- | --------- | ---------------------------- |
+| `governor_` | `address` | The address of the governor. |
 
 ### setIsleVault
 
 Sets the address of the Isle vault.
 
 ```solidity
-function setIsleVault(address vault_) external override onlyAdmin;
+function setIsleVault(address vault_) external override onlyGovernor;
 ```
 
 **Parameters**
 
-| Name     | Type      | Description |
-| -------- | --------- | ----------- |
-| `vault_` | `address` |             |
+| Name     | Type      | Description                    |
+| -------- | --------- | ------------------------------ |
+| `vault_` | `address` | The address of the Isle vault. |
 
 ### setProtocolPaused
 
-Sets the protocol pause.
+Pause or unpause the protocol.
 
 ```solidity
-function setProtocolPaused(bool protocolPaused_) external override onlyAdmin;
+function setProtocolPaused(bool protocolPaused_) external override onlyGovernor;
 ```
 
 **Parameters**
@@ -147,70 +130,70 @@ function setProtocolPaused(bool protocolPaused_) external override onlyAdmin;
 
 ### setContractPaused
 
-Sets the pause status of a specific contract
+Pause or unpause a specific contract.
 
 ```solidity
-function setContractPaused(address contract_, bool contractPaused_) external override onlyAdmin;
+function setContractPaused(address contract_, bool contractPaused_) external override onlyGovernor;
 ```
 
 **Parameters**
 
-| Name              | Type      | Description                                             |
-| ----------------- | --------- | ------------------------------------------------------- |
-| `contract_`       | `address` | The address of the contract to set the pause status for |
-| `contractPaused_` | `bool`    | A boolean indicating the pause status of the contract   |
+| Name              | Type      | Description                                              |
+| ----------------- | --------- | -------------------------------------------------------- |
+| `contract_`       | `address` | The address of the contract to set the pause status for. |
+| `contractPaused_` | `bool`    | A boolean indicating the pause status of the contract.   |
 
 ### setFunctionUnpaused
 
-Sets the unpause status of a specific function in a contract
+Unpause or ununpause a specific function in a contract.
 
 ```solidity
-function setFunctionUnpaused(address contract_, bytes4 sig_, bool functionUnpaused_) external override onlyAdmin;
+function setFunctionUnpaused(address contract_, bytes4 sig_, bool functionUnpaused_) external override onlyGovernor;
 ```
 
 **Parameters**
 
-| Name                | Type      | Description                                             |
-| ------------------- | --------- | ------------------------------------------------------- |
-| `contract_`         | `address` | The address of the contract                             |
-| `sig_`              | `bytes4`  | The function signature                                  |
-| `functionUnpaused_` | `bool`    | A boolean indicating the unpause status of the function |
+| Name                | Type      | Description                                            |
+| ------------------- | --------- | ------------------------------------------------------ |
+| `contract_`         | `address` | The address of the contract.                           |
+| `sig_`              | `bytes4`  | The function signature.                                |
+| `functionUnpaused_` | `bool`    | A boolean indicating whether the function is unpaused. |
 
 ### setProtocolFee
 
-Sets the protocol fee
+Sets the protocol fee.
 
 ```solidity
-function setProtocolFee(uint24 protocolFee_) external override onlyAdmin;
+function setProtocolFee(uint24 protocolFee_) external override onlyGovernor;
 ```
 
 **Parameters**
 
-| Name           | Type     | Description                          |
-| -------------- | -------- | ------------------------------------ |
-| `protocolFee_` | `uint24` | A uint24 indicating the protocol fee |
+| Name           | Type     | Description                                                                   |
+| -------------- | -------- | ----------------------------------------------------------------------------- |
+| `protocolFee_` | `uint24` | A uint24 indicating the protocol fee (100.0000% = 1e6 (6 decimal precision)). |
 
-### setValidCollateralAsset
+### setValidReceivableAsset
 
-Sets the validity of a collateral asset.
+Sets the validity of a receivable asset (should match ERC-721).
 
 ```solidity
-function setValidCollateralAsset(address collateralAsset_, bool isValid_) external override onlyAdmin;
+function setValidReceivableAsset(address receivableAsset_, bool isValid_) external override onlyGovernor;
 ```
 
 **Parameters**
 
 | Name               | Type      | Description                                                  |
 | ------------------ | --------- | ------------------------------------------------------------ |
-| `collateralAsset_` | `address` | The address of the collateral asset to set the validity for. |
-| `isValid_`         | `bool`    | A boolean indicating the validity of the collateral asset.   |
+| `receivableAsset_` | `address` | The address of the receivable asset to set the validity for. |
+| `isValid_`         | `bool`    | A boolean indicating the validity of the receivable asset.   |
 
 ### setValidPoolAsset
 
-Sets the validity of the pool asset.
+Sets the validity of the pool asset (should match ERC-20).
 
 ```solidity
-function setValidPoolAsset(address poolAsset_, bool isValid_) external override onlyAdmin;
+function setValidPoolAsset(address poolAsset_, bool isValid_) external override onlyGovernor;
 ```
 
 **Parameters**
@@ -225,7 +208,7 @@ function setValidPoolAsset(address poolAsset_, bool isValid_) external override 
 Sets the validity of a pool admin.
 
 ```solidity
-function setValidPoolAdmin(address poolAdmin_, bool isValid_) external override onlyAdmin;
+function setValidPoolAdmin(address poolAdmin_, bool isValid_) external override onlyGovernor;
 ```
 
 **Parameters**
@@ -235,68 +218,9 @@ function setValidPoolAdmin(address poolAdmin_, bool isValid_) external override 
 | `poolAdmin_` | `address` | The address of the pool admin to set the validity for. |
 | `isValid_`   | `bool`    | A boolean indicating the validity of the pool admin.   |
 
-### setMaxCoverLiquidation
-
-Sets the max cover liquidation that is applied for the pool admin
-
-```solidity
-function setMaxCoverLiquidation(address poolConfigurator_, uint24 maxCoverLiquidation_) external override onlyAdmin;
-```
-
-**Parameters**
-
-| Name                   | Type      | Description                                                  |
-| ---------------------- | --------- | ------------------------------------------------------------ |
-| `poolConfigurator_`    | `address` | The address of the pool admin                                |
-| `maxCoverLiquidation_` | `uint24`  | The max cover liquidation as a percentage for the pool admin |
-
-### setMinCover
-
-Sets the min cover required for the pool admin.
-
-```solidity
-function setMinCover(address poolConfigurator_, uint104 minCover_) external override onlyAdmin;
-```
-
-**Parameters**
-
-| Name                | Type      | Description                                |
-| ------------------- | --------- | ------------------------------------------ |
-| `poolConfigurator_` | `address` | The address of the pool admin.             |
-| `minCover_`         | `uint104` | The min cover required for the pool admin. |
-
-### setPoolLimit
-
-Sets the pool limit for the pool configurator
-
-```solidity
-function setPoolLimit(address poolConfigurator_, uint104 poolLimit_) external override onlyAdmin;
-```
-
-**Parameters**
-
-| Name                | Type      | Description                          |
-| ------------------- | --------- | ------------------------------------ |
-| `poolConfigurator_` | `address` | The address of the pool configurator |
-| `poolLimit_`        | `uint104` | The size limit of the pool           |
-
-### governor
-
-Returns the address of the governor
-
-```solidity
-function governor() external view override returns (address governor_);
-```
-
-**Returns**
-
-| Name        | Type      | Description                 |
-| ----------- | --------- | --------------------------- |
-| `governor_` | `address` | The address of the governor |
-
 ### isFunctionPaused
 
-Returns the pause status of a specific function in a contract
+Returns the pause status of a specific function in a contract.
 
 ```solidity
 function isFunctionPaused(address contract_, bytes4 sig_) public view override returns (bool functionIsPaused_);
@@ -304,20 +228,20 @@ function isFunctionPaused(address contract_, bytes4 sig_) public view override r
 
 **Parameters**
 
-| Name        | Type      | Description                 |
-| ----------- | --------- | --------------------------- |
-| `contract_` | `address` | The address of the contract |
-| `sig_`      | `bytes4`  | The function signature      |
+| Name        | Type      | Description                  |
+| ----------- | --------- | ---------------------------- |
+| `contract_` | `address` | The address of the contract. |
+| `sig_`      | `bytes4`  | The function signature.      |
 
 **Returns**
 
-| Name                | Type   | Description                                                              |
-| ------------------- | ------ | ------------------------------------------------------------------------ |
-| `functionIsPaused_` | `bool` | isFunctionPaused\_ A boolean indicating the pause status of the function |
+| Name                | Type   | Description                                                               |
+| ------------------- | ------ | ------------------------------------------------------------------------- |
+| `functionIsPaused_` | `bool` | isFunctionPaused\_ A boolean indicating the pause status of the function. |
 
 ### isFunctionPaused
 
-Returns the pause status of a specific function in a contract
+Returns the pause status of a specific function in a contract.
 
 ```solidity
 function isFunctionPaused(bytes4 sig_) external view override returns (bool functionIsPaused_);
@@ -325,72 +249,12 @@ function isFunctionPaused(bytes4 sig_) external view override returns (bool func
 
 **Parameters**
 
-| Name   | Type     | Description            |
-| ------ | -------- | ---------------------- |
-| `sig_` | `bytes4` | The function signature |
+| Name   | Type     | Description             |
+| ------ | -------- | ----------------------- |
+| `sig_` | `bytes4` | The function signature. |
 
 **Returns**
 
-| Name                | Type   | Description                                                              |
-| ------------------- | ------ | ------------------------------------------------------------------------ |
-| `functionIsPaused_` | `bool` | isFunctionPaused\_ A boolean indicating the pause status of the function |
-
-### maxCoverLiquidation
-
-Returns the max cover liquidation as a percentage for the pool configurator
-
-```solidity
-function maxCoverLiquidation(address poolConfigurator_) external view override returns (uint24 maxCoverLiqduidation_);
-```
-
-**Parameters**
-
-| Name                | Type      | Description                          |
-| ------------------- | --------- | ------------------------------------ |
-| `poolConfigurator_` | `address` | The address of the pool configurator |
-
-**Returns**
-
-| Name                    | Type     | Description                                                                               |
-| ----------------------- | -------- | ----------------------------------------------------------------------------------------- |
-| `maxCoverLiqduidation_` | `uint24` | maxCoverLiquidation\_ The max cover liquidation as a percentage for the pool configurator |
-
-### minCover
-
-Returns the min cover required for a pool configurator
-
-```solidity
-function minCover(address poolConfigurator_) external view override returns (uint104 minCover_);
-```
-
-**Parameters**
-
-| Name                | Type      | Description                          |
-| ------------------- | --------- | ------------------------------------ |
-| `poolConfigurator_` | `address` | The address of the pool configurator |
-
-**Returns**
-
-| Name        | Type      | Description                                      |
-| ----------- | --------- | ------------------------------------------------ |
-| `minCover_` | `uint104` | The min cover required for the pool configurator |
-
-### poolLimit
-
-Returns the pool limit of the pool under the pool configurator
-
-```solidity
-function poolLimit(address poolConfigurator_) external view override returns (uint104 poolLimit_);
-```
-
-**Parameters**
-
-| Name                | Type      | Description                          |
-| ------------------- | --------- | ------------------------------------ |
-| `poolConfigurator_` | `address` | The address of the pool configurator |
-
-**Returns**
-
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `poolLimit_` | `uint104` | The limit for the pool under the pool configurator |
+| Name                | Type   | Description                                                               |
+| ------------------- | ------ | ------------------------------------------------------------------------- |
+| `functionIsPaused_` | `bool` | isFunctionPaused\_ A boolean indicating the pause status of the function. |

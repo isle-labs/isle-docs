@@ -1,6 +1,6 @@
 # PoolDeployer
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference/libraries)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/libraries/PoolDeployer.sol)
 
 Library containing the logic to deploy a pool contract.
 
