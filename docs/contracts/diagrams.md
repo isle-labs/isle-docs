@@ -4,7 +4,7 @@
 
 Architecture of all smart contracts&#x20;
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Isle_Finance_Contract_Architecture.png" alt=""><figcaption></figcaption></figure>
 
 ## Scenarios
 
