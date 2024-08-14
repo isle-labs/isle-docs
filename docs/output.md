@@ -10,9 +10,9 @@
 - [WithdrawalManager](reference/WithdrawalManager.md)
 - [WithdrawalManagerStorage](reference/WithdrawalManagerStorage.md)
 - abstracts
-  - [Adminable](reference/abstracts/Adminable.md)
+  - [Governable](reference/abstracts/Governable.md)
 - interfaces
-  - [IAdminable](reference/interfaces/IAdminable.md)
+  - [IGovernable](reference/interfaces/IGovernable.md)
   - [IIsleGlobals](reference/interfaces/IIsleGlobals.md)
   - [IIsleGlobalsEvents](reference/interfaces/IIsleGlobalsEvents.md)
   - [ILoanManager](reference/interfaces/ILoanManager.md)
@@ -21,18 +21,17 @@
   - [IPool](reference/interfaces/IPool.md)
   - [IPoolAddressesProvider](reference/interfaces/IPoolAddressesProvider.md)
   - [IPoolConfigurator](reference/interfaces/IPoolConfigurator.md)
+  - [IPoolConfiguratorEvents](reference/interfaces/pool/IPoolConfiguratorEvents.md)
+  - [IPoolConfiguratorStorage](reference/interfaces/pool/IPoolConfiguratorStorage.md)
   - [IReceivable](reference/interfaces/IReceivable.md)
   - [IReceivableEvent](reference/interfaces/IReceivableEvent.md)
   - [IWithdrawalManager](reference/interfaces/IWithdrawalManager.md)
   - [IWithdrawalManagerStorage](reference/interfaces/IWithdrawalManagerStorage.md)
-  - pool
-    - [IPoolConfiguratorEvents](reference/interfaces/pool/IPoolConfiguratorEvents.md)
-    - [IPoolConfiguratorStorage](reference/interfaces/pool/IPoolConfiguratorStorage.md)
 - libraries
   - [Errors](reference/libraries/Errors.md)
   - [PoolDeployer](reference/libraries/PoolDeployer.md)
   - types
-    - [Globals](reference/libraries/types/Globals.md)
+    - [PoolConfigurator](reference/libraries/types/PoolConfigurator.md)
     - [Loan](reference/libraries/types/Loan.md)
     - [Receivable](reference/libraries/types/Receivable.md)
     - [WithdrawalManager](reference/libraries/types/WithdrawalManager.md)

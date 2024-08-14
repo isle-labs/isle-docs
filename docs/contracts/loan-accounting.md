@@ -44,7 +44,7 @@ $$
 
 In a protocol managing many loans at once, calculating the outstanding interest by summing the values naively will be extremely gas expensive. Since the rate of interest accrual for a single loan will be linear within its time frame, we can formulate a **piecewise linear function** that only has kinks when either a new loan is added or repaid. The function consists of four parameters
 
-<figure><img src="../.gitbook/assets/image (15).png" alt=""><figcaption><p>Rates here are represented as per day while in practice, it is per second</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption><p>Rates here are represented as per day while in practice, it is per second</p></figcaption></figure>
 
 1. $$issuanceRate$$: Units of funds earned per second as interest for all outstanding loans
 2. $$accountedInterest$$: "Snapshotted value" of outstanding interest updated at each point the function parameters are updated&#x20;
