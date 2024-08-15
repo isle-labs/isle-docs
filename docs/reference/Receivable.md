@@ -1,35 +1,39 @@
 # Receivable
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/Receivable.sol)
 
-**Inherits:**
-[ReceivableStorage](/docs/reference/ReceivableStorage.md), Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeable, ERC721BurnableUpgradeable, UUPSUpgradeable, [Adminable](/docs/reference/abstracts/Adminable.md), [IReceivable](/docs/reference/interfaces/IReceivable.md)
+**Inherits:** [ReceivableStorage](/docs/reference/ReceivableStorage.md), Initializable,
+ERC721Upgradeable, ERC721EnumerableUpgradeable, ERC721BurnableUpgradeable, UUPSUpgradeable,
+[Governable](/docs/reference/abstracts/Governable.md),
+[IReceivable](/docs/reference/interfaces/IReceivable.md)
 
 ## Functions
 
 ### \_authorizeUpgrade
 
 ```solidity
-function _authorizeUpgrade(address newImplementation) internal override onlyAdmin;
+function _authorizeUpgrade(address newImplementation) internal override onlyGovernor;
 ```
 
 ### initialize
 
+_Initializes the Receivable._
+
 ```solidity
-function initialize(address initialAdmin_) external override initializer;
+function initialize(address initialGovernor_) external override initializer;
 ```
 
 **Parameters**
 
-| Name            | Type      | Description              |
-| --------------- | --------- | ------------------------ |
-| `initialAdmin_` | `address` | The address of the admin |
+| Name               | Type      | Description                  |
+| ------------------ | --------- | ---------------------------- |
+| `initialGovernor_` | `address` | The address of the governor. |
 
 ### createReceivable
 
-Only the buyer can call this function
+Mint a new receivable.
 
-_Mint a new receivable_
+_The event faceAmount is converted to decimal with 6 decimals._
 
 ```solidity
 function createReceivable(RCV.Create calldata params_) external override returns (uint256 tokenId_);
@@ -37,19 +41,19 @@ function createReceivable(RCV.Create calldata params_) external override returns
 
 **Parameters**
 
-| Name      | Type         | Description |
-| --------- | ------------ | ----------- |
-| `params_` | `RCV.Create` |             |
+| Name      | Type         | Description                                                            |
+| --------- | ------------ | ---------------------------------------------------------------------- |
+| `params_` | `RCV.Create` | The struct containing the information of the receivable to be created. |
 
 **Returns**
 
-| Name       | Type      | Description                            |
-| ---------- | --------- | -------------------------------------- |
-| `tokenId_` | `uint256` | The id of the newly created receivable |
+| Name       | Type      | Description                             |
+| ---------- | --------- | --------------------------------------- |
+| `tokenId_` | `uint256` | The id of the newly created receivable. |
 
 ### getReceivableInfoById
 
-_Get the information of a receivable_
+_Get the information of a receivable._
 
 ```solidity
 function getReceivableInfoById(uint256 tokenId_) external view override returns (RCV.Info memory info_);
@@ -57,21 +61,29 @@ function getReceivableInfoById(uint256 tokenId_) external view override returns 
 
 **Parameters**
 
-| Name       | Type      | Description              |
-| ---------- | --------- | ------------------------ |
-| `tokenId_` | `uint256` | The id of the receivable |
+| Name       | Type      | Description               |
+| ---------- | --------- | ------------------------- |
+| `tokenId_` | `uint256` | The id of the receivable. |
 
 **Returns**
 
-| Name    | Type       | Description                                             |
-| ------- | ---------- | ------------------------------------------------------- |
-| `info_` | `RCV.Info` | The struct containing the information of the receivable |
+| Name    | Type       | Description                                              |
+| ------- | ---------- | -------------------------------------------------------- |
+| `info_` | `RCV.Info` | The struct containing the information of the receivable. |
 
 ### burnReceivable
+
+_Burn a receivable._
 
 ```solidity
 function burnReceivable(uint256 tokenId_) external;
 ```
+
+**Parameters**
+
+| Name       | Type      | Description               |
+| ---------- | --------- | ------------------------- |
+| `tokenId_` | `uint256` | The id of the receivable. |
 
 ### \_beforeTokenTransfer
 
@@ -92,8 +104,12 @@ function _beforeTokenTransfer(
 
 ### supportsInterface
 
+_See {IERC165-supportsInterface}._
+
 ```solidity
-function supportsInterface(bytes4 interfaceId_)
+function supportsInterface(
+    bytes4 interfaceId_
+)
     public
     view
     override(ERC721Upgradeable, ERC721EnumerableUpgradeable)

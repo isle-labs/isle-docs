@@ -1,8 +1,9 @@
 # Receivable
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference/libraries/types)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/libraries/types/DataTypes.sol)
 
-Namespace for the structs used in {Receivable}
+Namespace for the structs used in
+[Receivable](/docs/reference/libraries/types/Receivable.md)
 
 ## Structs
 
@@ -17,6 +18,16 @@ struct Create {
     uint16 currencyCode;
 }
 ```
+
+**Properties**
+
+| Name                 | Type      | Description                                                                                     |
+| -------------------- | --------- | ----------------------------------------------------------------------------------------------- |
+| `buyer`              | `address` | The address of the buyer that's expected to pay for this receivable.                            |
+| `seller`             | `address` | The address of the seller that's expected to receive payment for this receivable.               |
+| `faceAmount`         | `uint256` | The amount of the receivable.                                                                   |
+| `repaymentTimestamp` | `uint256` | The timestamp when the receivable is expected to be repaid.                                     |
+| `currencyCode`       | `uint16`  | The currency code specified by ISO 4217 in which the receivable is expressed, e.g. 840 for USD. |
 
 ### Info
 

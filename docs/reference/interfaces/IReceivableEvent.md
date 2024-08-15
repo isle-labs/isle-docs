@@ -1,10 +1,12 @@
 # IReceivableEvent
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference/interfaces)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/interfaces/IReceivableEvent.sol)
 
 ## Events
 
 ### AssetCreated
+
+Emitted when mint a new receivable.
 
 ```solidity
 event AssetCreated(
@@ -16,14 +18,26 @@ event AssetCreated(
 );
 ```
 
+**Parameters**
+
+| Name                  | Type      | Description                                                                       |
+| --------------------- | --------- | --------------------------------------------------------------------------------- |
+| `buyer_`              | `address` | The address of the buyer that's expected to pay for this receivable.              |
+| `seller_`             | `address` | The address of the seller that's expected to receive payment for this receivable. |
+| `tokenId_`            | `uint256` | The id of the receivable.                                                         |
+| `faceAmount_`         | `uint256` | The amount of the receivable.                                                     |
+| `repaymentTimestamp_` | `uint256` | The timestamp when the receivable is expected to be repaid.                       |
+
 ### AssetBurned
+
+Emitted when burn a receivable.
 
 ```solidity
 event AssetBurned(uint256 indexed tokenId_);
 ```
 
-### IsleGlobalsSet
+**Parameters**
 
-```solidity
-event IsleGlobalsSet(address indexed previousIsleGlobals_, address indexed currentIsleGlobals_);
-```
+| Name       | Type      | Description               |
+| ---------- | --------- | ------------------------- |
+| `tokenId_` | `uint256` | The id of the receivable. |

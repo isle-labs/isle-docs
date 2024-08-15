@@ -1,11 +1,23 @@
 # PoolConfiguratorStorage
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/PoolConfiguratorStorage.sol)
 
 **Inherits:**
-[IPoolConfiguratorStorage](/docs/reference/interfaces/pool/IPoolConfiguratorStorage.md)
+[IPoolConfiguratorStorage](/docs/reference/interfaces/IPoolConfiguratorStorage.md)
 
 ## State Variables
+
+### \_config
+
+```solidity
+PoolConfigurator.Config internal _config;
+```
+
+### admin
+
+```solidity
+address public override admin;
+```
 
 ### asset
 
@@ -25,12 +37,6 @@ address public override pool;
 address public override buyer;
 ```
 
-### config
-
-```solidity
-Config public override config;
-```
-
 ### poolCover
 
 ```solidity
@@ -47,16 +53,4 @@ mapping(address => bool) public override isSeller;
 
 ```solidity
 mapping(address => bool) public override isLender;
-```
-
-## Structs
-
-### Config
-
-```solidity
-struct Config {
-    bool openToPublic;
-    uint24 adminFee;
-    uint32 gracePeriod;
-}
 ```

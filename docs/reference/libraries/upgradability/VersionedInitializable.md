@@ -1,19 +1,16 @@
 # VersionedInitializable
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference/libraries/upgradability)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/libraries/upgradability/VersionedInitializable.sol)
 
-**Author:**
-Aave, inspired by the OpenZeppelin Initializable contract
+**Author:** Aave, inspired by the OpenZeppelin Initializable contract
 
-Helper contract to implement initializer functions. To use it, replace
-the constructor with a function that has the `initializer` modifier.
+Helper contract to implement initializer functions. To use it, replace the constructor with a function that has the
+`initializer` modifier.
 
-_WARNING: Unlike constructors, initializer functions must be manually
-invoked. This applies both to deploying an Initializable contract, as well
-as extending an Initializable contract via inheritance.
-WARNING: When used with inheritance, manual care must be taken to not invoke
-a parent initializer twice, or ensure that all initializers are idempotent,
-because this is not dealt with automatically as with constructors._
+_WARNING: Unlike constructors, initializer functions must be manually invoked. This applies both to deploying an
+Initializable contract, as well as extending an Initializable contract via inheritance. WARNING: When used with
+inheritance, manual care must be taken to not invoke a parent initializer twice, or ensure that all initializers are
+idempotent, because this is not dealt with automatically as with constructors._
 
 ## State Variables
 
@@ -56,7 +53,7 @@ Returns the revision number of the contract
 _Needs to be defined in the inherited class as a constant._
 
 ```solidity
-function getRevision() internal pure virtual returns (uint256);
+function getRevision() public pure virtual returns (uint256);
 ```
 
 **Returns**

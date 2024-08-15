@@ -1,6 +1,6 @@
 # Loan
 
-[Git Source](https://github.com/bsostech/isle/blob/1b9b42ecc99464a07a9859078c2c7bc923a6500d/docs/reference/libraries/types)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/libraries/types/DataTypes.sol)
 
 Namespace for the structs used in {LoanManager}
 
@@ -12,8 +12,8 @@ Namespace for the structs used in {LoanManager}
 struct Info {
     address buyer;
     address seller;
-    address collateralAsset;
-    uint256 collateralTokenId;
+    address receivableAsset;
+    uint256 receivableTokenId;
     uint256 principal;
     uint256 drawableFunds;
     uint256 interestRate;

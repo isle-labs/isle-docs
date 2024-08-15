@@ -4,7 +4,7 @@
 
 The process of withdrawals is managed by the `WithdrawalManager`. The `withdrawalManager` holds custody of users' LP tokens and allows them to withdraw at specified time intervals - **Withdrawal Window** after waiting a minimum of a full **Withdrawal Cycle**. Users' withdrawal requests are grouped into cycles so that pro-rata distributions of available cash can be performed.
 
-<figure><img src="../.gitbook/assets/image (14).png" alt=""><figcaption><p>Normal withdrawal process</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>Normal withdrawal process</p></figcaption></figure>
 
 ## Request Updates
 
