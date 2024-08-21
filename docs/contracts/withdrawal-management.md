@@ -10,11 +10,6 @@ The process of withdrawals is managed by the `WithdrawalManager`. The `withdrawa
 
 If a user misses their withdrawal window or wishes to modify their withdrawal request, they have several options to update it.&#x20;
 
-### Refresh Action
-**Purpose:** This action allows users to resubmit their withdrawal request with the original amount of shares if they have simply missed the withdrawal window but wish to proceed as initially planned.
-
-**How to Perform:** To refresh the request, call `Pool::requestRedeem(0)`. This command resubmits the withdrawal request without altering the amount of shares.
-
 ### Modify Action
 **Purpose:** For users looking to adjust the amount of shares in their withdrawal request, the modify action provides the means to either increase or decrease the desired amount.
 
