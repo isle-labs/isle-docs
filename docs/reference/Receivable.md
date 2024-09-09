@@ -1,6 +1,6 @@
 # Receivable
 
-[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/Receivable.sol)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/main/contracts/Receivable.sol)
 
 **Inherits:** [ReceivableStorage](/docs/reference/ReceivableStorage.md), Initializable,
 ERC721Upgradeable, ERC721EnumerableUpgradeable, ERC721BurnableUpgradeable, UUPSUpgradeable,

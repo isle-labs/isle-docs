@@ -1,6 +1,6 @@
 # IGovernable
 
-[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/interfaces/IGovernable.sol)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/main/contracts/interfaces/IGovernable.sol)
 
 Contract module that provides a basic access control mechanism, with a governor that can be granted exclusive access to
 specific functions. The inheriting contract must set the initial governor in the constructor.
