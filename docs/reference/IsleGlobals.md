@@ -1,6 +1,6 @@
 # IsleGlobals
 
-[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/IsleGlobals.sol)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/main/contracts/IsleGlobals.sol)
 
 **Inherits:** [IIsleGlobals](/docs/reference/interfaces/IIsleGlobals.md),
 [VersionedInitializable](/docs/reference/libraries/upgradability/VersionedInitializable.md),

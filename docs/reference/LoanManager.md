@@ -1,6 +1,6 @@
 # LoanManager
 
-[Git Source](https://github.com/isle-labs/isle-contract/blob/69690fa7f99cb787956fc4bb0d751a45fe8f3519/contracts/LoanManager.sol)
+[Git Source](https://github.com/isle-labs/isle-contract/blob/main/contracts/LoanManager.sol)
 
 **Inherits:** [ILoanManager](/docs/reference/interfaces/ILoanManager.md), IERC721Receiver,
 [LoanManagerStorage](/docs/reference/LoanManagerStorage.md), ReentrancyGuard,
